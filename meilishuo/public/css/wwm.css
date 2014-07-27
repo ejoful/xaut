@@ -1,0 +1,17 @@
+#wwm_search_result {
+        width:100%;
+        height:50px;
+        background:#F2F0F1;
+        line-height:50px;
+        font-size:14px;
+}
+
+#wwm_search_result span {
+        font-size:18px;
+        font-weight:bold;
+        color:#FF639B;
+}
+
+#wwm_search_result a {
+        color:#FF639B;
+}

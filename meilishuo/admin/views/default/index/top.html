@@ -1,0 +1,37 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html class="off" xmlns="http://www.w3.org/1999/xhtml">
+        <head>
+                <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+                <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+                <link href="<{$res}>/css/style.css" rel="stylesheet" type="text/css"/>
+                <link href="<{$public}>/css/dialog.css" rel="stylesheet" type="text/css" />
+                <script language="javascript" type="text/javascript" src="<{$public}>/js/jquery/jquery-1.7.2.min.js"></script>
+                <script language="javascript" type="text/javascript" src="<{$public}>/js/dialog.js"></script>
+                <title>管理中心</title>
+        </head>
+        <body scroll="no">
+                <div id="header">
+                        <div class="logo"><a href="<{$url}>" title="管理中心"></a></div>
+                        <div class="fr"><div class="style_but"></div></div>
+                        <div class="col-auto" style="overflow: visible">
+                                <div class="log white cut_line">欢迎您！<{$smarty.session.adminname}><span>|</span>
+                                        <a href="<{$app}>/login/logout">[退出]</a> |
+
+                                        <a onclick="$('#rightMain').attr('src','<{$url}>/main')" href="javascript:">[管理首页]</a>|
+
+                                        <a href="<{$root}>" target="_blank">[站点首页]</a>
+                                </div>
+                                <div class="log_right white cut_line">
+                                        <a href="http://www.pinphp.com" target="_blank">官方网站</a><span>|</span>
+                                        <a href="http://bbs.pinphp.com" target="_blank">支持论坛</a><span>|</span>
+                                </div>
+                        </div>
+                        <ul class="nav white" id="top_menu">
+                                <{foreach $top_menu as $val}>
+                                <li id="_M<{$val.id}>" class="top_menu">
+                                        <a href="javascript:_M(<{$val.id}>,'')"  hidefocus="true" style="outline:none;"><{$val.name}></a>
+                                </li>
+                                <{/foreach}>
+                        </ul>
+                </div>

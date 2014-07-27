@@ -1,0 +1,1 @@
+<?php {"pri":"id","0":"username","1":"password","2":"sex","3":"birthday","4":"email","5":"regtime","6":"logintime","7":"loginip","8":"status","9":"face","10":"province","11":"city","12":"area","13":"blog","14":"sign","15":"fansnum","16":"follownum","17":"sharenum","18":"likenum","19":"albumnum"}yes

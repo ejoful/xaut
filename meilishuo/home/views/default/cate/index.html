@@ -1,0 +1,48 @@
+<{include file="public/header.html"}>
+<div class="content clearfix">
+    <div class="item_head mt15">
+        <h2 class="red">
+                <{if isset($pcate_info)}>
+                        <{$pcate_info.catename}>			
+                <{else}>
+                        热门
+                <{/if}>			
+                <{if isset($cate_info)}>
+                        <span class="tag_title gray">&nbsp;&nbsp;<{$cate_info.catename}></span>
+                <{/if}>
+        </h2>
+
+    </div>
+    <div class="item_list infinite_scroll" style="min-height:600px;">
+<{*-----------------------------------------------------------------------------*}>    
+        <div class="box_shadow masonry_brick mt15" style="position: absolute; top: 0px; left: 0px;">
+            <div class="catalog clearfix">
+                    
+                <{foreach $cate_list as $val}>
+            	<div class="catalog_item">
+                    <h3><a class="on"><{$val.catename}></a></h3>
+                    <div class="clearfix">
+                        <{foreach $val['items'] as $sval}>
+                            <a href="<{$app}>/cate/index/cid/<{$sval['id']}>"  <{if $cid eq $sval['id']}>class="on"<{/if}>><{$sval['catename']}></a>
+                        <{/foreach}>
+                    </div>
+                </div>            	
+                <{/foreach}>
+            </div>
+        </div>
+<{*-----------------------------------------------------------------------------*}>            
+        <{include file="public/goods_list.html"}>
+    </div>
+    <{if $show_sp eq 1}>
+        <div id="more" class="center">
+                <a href="<{$app}>/cate/index/sp/2/cid/<{$cid}>/p/<{$p}>" hidefocus="true"></a>
+        </div>    	 
+   	<{/if}> 
+       
+    	<div id="page" class="page mt20 clearfix" style="display: block;">
+        	<span class="page_num"><{$fpage}></span>
+        </div>
+     
+</div>
+
+<{include file="public/footer.html"}>

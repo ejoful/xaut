@@ -1,0 +1,35 @@
+<{include file="public/header.html"}>
+<{load href="<{$res}>/css/uc.css" }>   
+<{load href="<{$res}>/css/uc_album.css" }>   
+<div class="middle uc clearfix">
+	<{include file="usercenter/head.html"}>
+        <{if $uid eq $loginuid}>
+	<div class="clearfix album mt20" style="padding:0px;width:100%;">
+                <a class="upload left" href="<{$app}>/usercenter/albuminfo">创建新专辑</a>
+    		<ul class="item_order left">
+	        	<li><i>排序：</i></li>
+	   		<li><a href="<{$app}>/usercenter/album"  <{if $type eq 'index'}>class="current"<{/if}>>我发表的</a></li>
+                        <li><a href="<{$app}>/usercenter/album/type/follow" <{if $type eq 'follow'}>class="current"<{/if}>>关注的人</a></li>
+                </ul>       
+        </div>
+        <{/if}>
+    <div class="clearfix"></div>   
+<{*-----------------------------------------------------------------------------------------------*}>       
+	<div class="clearfix mt20 uc_index" style="min-height:200px; margin-top:10px;">
+                <{if !empty($albumList)}>
+                	<{include file="usercenter/albumlist.html"}> 
+                <{else}>
+                	<{if $uid eq $loginuid and $type neq 'follow'}>
+                        <span style="font-size:18px;color:#A2A1A1;font-weight: bold;margin-bottom: 8px;line-height: 55px;">你还没有专辑哦~赶紧创建一个，收集你心爱的宝贝吧~</span>
+                        <{else}>
+                        <span style="font-size:18px;color:#A2A1A1;font-weight: bold;margin-bottom: 8px;line-height: 55px;">ta&nbsp;还没有专辑哦~</span>
+                        <{/if}>               
+                <{/if}>
+		<{*<{include file="usercenter/albumlist.html"}> *}>
+    </div>  
+    <div class="page mt20 clearfix" style="display:block;">
+        <span class="page_num"><{$fpage}></span>
+    </div>
+<{*-----------------------------------------------------------------------------------------------*}>
+</div>
+<{include file="public/footer.html"}> 

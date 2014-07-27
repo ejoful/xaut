@@ -1,0 +1,17 @@
+<{include file="public/header.html"}>
+<{load file="<{$public}>/css/uc.css"}>
+<div class="middle">
+	<table border=1 align="center" width="600" style="text-align:center">
+		<caption><h2>搜索用户列表</h2></caption>
+		<tr><th>用户名</th><th>专辑</th><th>粉丝</th><th>加关注</th></tr>
+		<{foreach $userlist as $user}>
+			<tr>
+				<td width="150"><{$user.username}><img src="<{$res}>/images/userface/<{$user.face}>"></td>  
+				<td><{$user.albumnum}></td>  
+				<td><{$user.fansnum}></td>  
+				<td><span class="add_follow" fans_id="3"></span></td>  
+			</tr>
+		<{/foreach}>
+	</table>
+</div>
+<{include file="public/footer.html"}> 

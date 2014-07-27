@@ -1,0 +1,49 @@
+<div class="uc_user_info ">
+    <div class="clearfix top"> 
+	<a href="<{$app}>/usercenter/index/uid/<{$uid}>" class="left">
+	    <img src="<{$res}>/images/userface/<{$userface}>" width="80" height="80" alt="<{$uname}>" class="avatar">
+	</a>
+	<div class="user_name left"> 
+		<a href="<{$app}>/usercenter/index/uid/<{$uid}>" target="_blank"><{$uname}></a>
+		<{if $uid eq $loginuid}>
+		<div><a href="<{$app}>/usercenter/userbasic" class="uc_home_link">个人资料&nbsp;&nbsp;(设置)</a></div>
+		<{else}>
+		<div class="add_follow <{if $is_follow eq 1}>yet<{/if}>" fans_id="<{$uid}>"></div>
+		<{/if}>
+	</div>    
+    </div>
+    <div class="user_collect_info" style="font-size:13px;"> 
+    	<a href="<{$app}>/usercenter/album/uid/<{$uid}>">专辑<span></span></a> 
+        <a href="<{$app}>/usercenter/likeslist/uid/<{$uid}>">喜欢<span></span></a> 
+    	<a href="<{$app}>/usercenter/sharelist/uid/<{$uid}>">分享<span></span></a>
+        <a href="<{$app}>/usercenter/followlist/uid/<{$uid}>"><span>关注</span> <{$follownum}></a> |
+        <a href="<{$app}>/usercenter/fanslist/uid/<{$uid}>"><span>粉丝</span> <{$fansnum}> </a>
+
+  	</div>
+        <{if $mod eq 'usercenter' or $mod eq 'message'}>
+        <div class="celerity_menu app_line">
+		<{if $uid eq $loginuid}>
+		<ul>
+			<li><a href="<{$app}>/usercenter/index" <{if $mod eq 'usercenter' and $actionName eq 'index'}>class="on"<{/if}>><span class="ico_side ico_home"></span>我的首页</a></li>
+			<li><a href="<{$app}>/message/index" <{if $mod eq 'message' and $actionName eq 'index'}>class="on"<{/if}>><span class="ico_side ico_favorites"></span>我的私信</a></li>
+			<li><a href="<{$app}>/message/atme" <{if $actionName eq 'atme'}>class="on"<{/if}>><span class="ico_side ico_atme"></span>@提到我的 <span id="app_left_count_atme"></span></a></li>
+			<li><a href="<{$app}>/message/notice" <{if $actionName eq 'notice'}>class="on"<{/if}>><span class="ico_side ico_comment"></span>我的通知<span id="app_left_count_comment"></span></a></li>
+		</ul>
+		<{/if}>
+	</div>
+        <{/if}>
+	<{if MODULE_NAME eq 'album' and ACTION_NAME eq 'details'}>    
+	<p class="album_intro mt15">
+	{$info.remark}
+	</p>
+	<{*----------------------------------------------评论-----------------------------------------------------*}>  
+	<div class="comments mt15">
+		<textarea class="comments_box" id="comments_box" def="你也可以顺便说点什么 O(∩_∩)O"></textarea>
+		<div class="clearfix">
+			<input type="button" class="submit comments_btn" pid="{$info['album_id']}" id="comments_btn"value="确定"/>
+		</div>
+		<div class="list_wrap"></div>
+	</div>
+	<{*----------------------------------------------------------------------------------------------------*}>     
+	<{/if}>    
+</div>

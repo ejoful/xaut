@@ -1,0 +1,75 @@
+<{include file="public/header.html"}>
+<{load href="<{$res}>/css/uc.css" }>  
+<{load href="<{$res}>/css/uc_info.css"}>
+<{load href="<{$public}>/js/jquery/plugins/jquery.imagePreview.js"}>
+
+<div class="middle">
+    <div class="uc clear-fix">
+        <div class="clearfix mt20">
+<{*------------------------------------me--------------------------------------------*}>
+            <div class="uc_me radius7">
+            	<{if empty($historyList)}>
+                        <{if $loginuid eq $uid}>
+                        <span class="empty">您还没有动态哦~</span>
+                        <{else}>
+	                <span class="empty">看来主人刚入住哦，还没有她的动态~</span>
+                        <{/if}>
+                <{/if}>
+                
+                <br/>
+                
+                <{*下面是用户动态中要遍历出的最近动态内容*}>
+                <{foreach $historyList as $val}>
+                <div class="history_item clearfix">
+                        <a class="left" href="<{$url}>/index/uid/<{$val.uid}>">
+                                <img src="<{$res}>/images/userface/<{$val.face}>" class="avatar"/>
+                        </a>
+                        <div class="left pl10">
+                        	<div class="clearfix" style="background: #f6f6f6;padding:3px 0;font-size: 14px;height:20px;line-height:20px;margin-bottom: 15px;">
+                                        <a href="<{$url}>/index/uid/<{$val.uid}>" class="user_name left"><{$val.username}></a>
+                                        <span class="right history_time"><{$val.addtime|date_format:"%m月 %d日  %H:%M:%S"}></span>
+                                </div>
+    
+                                <div class="history_content">
+                                    <span><{$val.info}></span>
+                                    <{if $val.type eq 1}><{*关注*}>
+                                    <a href="<{$url}>/index/uid/<{$val.hid}>" target="_blank"><span style="color: red;">@<{$val.content}></span></a>
+                                    <{else}>
+                                    <ul>
+                                            <li style="margin-top:10px;">
+                                                <{*对商品的操作*}>
+						<{if $val.status eq 0}>
+						<span style="color:red;"><{$val.del}>&gt;&gt;</span>
+						<{else}>
+						<a href="<{$app}>/goods/index/id/<{$val.hid}>" target="_blank">
+							<img src="<{$val.path}>/<{$val.conpic}>" style="max-width:100px;" bimg="<{$val.path}>/<{$val.conpic}>" class="preview" />
+						</a>
+						<{/if}>
+						<br/><br/>                                          
+                                            </li>
+                                    </ul>
+                                    <{/if}>
+                                </div>
+                        </div>
+                </div>
+                <{/foreach}>
+              <{* 结束 *}>
+	      <script>
+		      $(function(){
+			    $(".preview").preview();
+		      });
+	      </script>
+                
+                <div id="page" class="page mt20 clearfix" style="display:block;">
+					<span class="page_num"><{$fpage}></span>
+                </div>
+            </div>
+<{*-----------------------------------user_info---------------------------------------------*}>  
+          <{*  <div class="right">*}>
+            <div style="float:left">
+            	<{include file="usercenter/userinfo.html"}> 
+            </div>			                        
+        </div>
+    </div>
+</div>
+<{include file="public/footer.html"}> 

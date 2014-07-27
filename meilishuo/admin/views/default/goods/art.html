@@ -1,0 +1,55 @@
+<table width="100%" cellspacing="0">
+        <thead>
+                <tr>
+                        <th width=15><input type="checkbox" value="" id="check_box" onclick="selectall('id[]');"></th>
+                        <th width="40">ID</th>
+                        <th width="40">&nbsp;</th>
+                        <th align="left">商品名称</th>
+                        <th width="100">添加时间</th>
+                        <th width=60>分类</th>
+
+
+                        <th width=60>价格(元)</th>
+                        <th width=40>喜欢</th>
+                        <th width=40>人气</th>
+                        <th width=30>审核</th>
+                        <th width=30>操作</th>
+                </tr>
+        </thead>
+        <tbody>
+                <{foreach $goods_list as $val}>
+                <tr>
+                        <td align="center"><input type="checkbox" value="<{$val.id}>" name="id[]"></td>
+                        <td align="center"><{$val.id}></td>
+                        <td align="center"><img src="<{$public}>/uploads/goods/thumb_s/<{date('Y-m-d',$val.addtime)}>/<{$val.picname}>" width="35"  class="preview" bimg="<{$public}>/uploads/goods/thumb_m/<{date('Y-m-d',$val.addtime)}>/<{$val.picname}>" title="<{$val.goodsname}>"></td>
+                        <td align="left"><a href="<{$val.url}>" target=_blank><{$val.goodsname}></a></td>
+                        <td align="center"><{date("Y-m-d",$val.addtime)}></td>
+                        <{foreach $goods_cate_list as $val2}>
+                        <{if $val2.id == $val.goodscid}>
+                        <{$ncatename = $val2.catename}>
+                        <{/if}>
+                        <{/foreach}>
+                        <td align="center"><b><{$ncatename}></b>&&<{$val.goodscid}></td>
+
+                        <td align="center"><em style="color:red;">￥<{$val.price}></em></td>
+                        <td><input type="text" class="input-text-c input-text" value="<{$val.likesnum}>" size="4" name="likes_<{$val.id}>"  id="likes_<{$val.id}>" onchange="likes(<{$val.id}>)" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"></td>
+                        <td align="center"><em style="color:green;"><{$val.hits}></em></td>
+
+
+                        <td align="center" onclick="status(<{$val.id}>,<{$val.status}>)" id="status_<{$val.id}>"><img src="<{$public}>/images/status_<{$val.status}>.gif" /></td>
+                        <td align="center"><a class="blue" href="edit/id/<{$val.id}>">编辑</a></td>
+                </tr>
+                <{/foreach}>
+        </tbody>
+</table>
+<div class="btn">
+        <label for="check_box" style="float:left;">全选/取消</label>
+        <input type="submit" class="button" name="dosubmit" value="删除" onclick="return confirm('确定删除么？')" style="float:left;margin:0 10px 0 10px;"/>
+
+        <div id="pages"><{$fpage}></div>
+        <script>
+                $(function(){
+                        $(".preview").preview();
+                });
+        </script>
+</div>

@@ -1,0 +1,52 @@
+<{include file="index/header.html"}>
+<div class="pad_10">
+        <form action="<{$url}>/do_edit" method="post" name="myform" id="myform">
+                <table width="100%" cellpadding="2" cellspacing="1" class="table_form">
+                        <tr>
+                                <th width="100">分类名称 :</th>
+                                <td><input type="text" name="catename" id="module" class="input-text" value="<{$goods_cate_info.catename}>"></td>
+                        </tr>
+
+
+                        <tr>
+                                <th>喜欢数 :</th>
+                                <td><input type="text" name="likesnum" id="action_name" class="input-text" value="<{$goods_cate_info.likesnum}>"></td>
+                        </tr>
+                        <tr>
+                                <th>父级分类 :</th>
+                                <td>
+                                        <select name="pid">
+                                                <{$str = "&nbsp;&nbsp;&nbsp;&nbsp;"}>
+                                                <{foreach $goods_cate_list as $val}>
+                                                <{$val.level=count(explode("-",$val["assem"]))}>
+                                                <{$str2=str_repeat($str,$val.level)}>
+                                                <option value="<{$val.id}>" <{if $val.id eq $goods_cate_info.pid}> selected="selected"<{/if}>><{$str2}>|-<{$val.catename}></option>
+                                                <{/foreach}>
+                                        </select>
+                                </td>
+                        </tr>
+
+                        <tr>
+                                <th>是否热门 :</th>
+                                <td>
+                        <input type="radio" name="ishot" class="radio_style" value="1" <{if $goods_cate_info.ishot eq 1}> checked<{/if}>> &nbsp;热门&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="ishot" class="radio_style" value="0" <{if $goods_cate_info.ishot eq 0}> checked<{/if}>> &nbsp;非热门
+                        </td>
+                        </tr>
+                        <tr>
+                                <th>状态 :</th>
+                                <td>
+                        <input type="radio" name="status" class="radio_style" value="1" <{if $goods_cate_info.status eq 1}> checked<{/if}>> &nbsp;有效&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="status" class="radio_style" value="0" <{if $goods_cate_info.status eq 0}> checked<{/if}>> &nbsp;禁用
+                        </td>
+                        </tr>
+                </table>
+                <input type="hidden" name="id" value="<{$goods_cate_info.id}>" />
+                <input type="submit" name="dosubmit" id="dosubmit" class="dialog" value=" ">
+        </form>
+</div>
+<script>
+        $("select option[value=<{$goods_cate_info.id}>]").attr('disabled','true').css('background','#ccc');
+</script>
+</body>
+</html>

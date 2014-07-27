@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+        <head>
+                <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+                <meta http-equiv="X-UA-Compatible" content="IE=7" />
+                <link href="<{$res}>/css/style.css" rel="stylesheet" type="text/css"/>
+                <link href="<{$public}>/css/dialog.css" rel="stylesheet" type="text/css" />
+                <script language="javascript" type="text/javascript" src="<{$public}>/js/jquery/jquery-1.7.2.min.js"></script>
+                <script language="javascript" type="text/javascript" src="<{$public}>/js/jquery/plugins/formvalidator.js"></script>
+                <script language="javascript" type="text/javascript" src="<{$public}>/js/jquery/plugins/formvalidatorregex.js"></script>
+                <script language="javascript" type="text/javascript" src="<{$res}>/js/admin_common.js"></script>
+                <script language="javascript" type="text/javascript" src="<{$public}>/js/dialog.js"></script>
+                <script language="javascript" type="text/javascript" src="<{$public}>/js/iColorPicker.js"></script>
+                <script language="javascript">
+                        var URL = '<{$url}>';
+                        var ROOT_PATH = '<{$root}>';
+                        var APP	 =	 '<{$app}>';
+                        var lang_please_select = "<{*请选择*}>请选择";	//smarty
+                        var def={"request":[]};
+                        $(function($){
+                                $("#ajax_loading").ajaxStart(function(){
+                                        $(this).show();
+                                }).ajaxSuccess(function(){
+                                        $(this).hide();
+                                });
+                        });
+
+                </script>
+                <title>管理中心</title>
+        </head>
+        <body>
+                <div id="ajax_loading">提交请求中，请稍候...</div>
+                <{if $show_header neq false}>
+                        <{if ($sub_menu neq '') OR ($big_menu neq '')}>
+                                <div class="subnav">
+                                        <div class="content-menu ib-a blue line-x">
+												<{if !empty($big_menu)}>
+                                                        <a class="add fb" href="<{$big_menu.0}>"><em><{$big_menu.1}></em></a>　
+												<{/if}>
+                                        </div>
+                                </div>
+                        <{/if}>
+                <{/if}>

@@ -1,0 +1,91 @@
+<{include file="public/header.html"}>
+<{load href="<{$public}>/css/banner.css"}>
+<{load href="<{$public}>/js/banner.js"}>
+
+
+<div class="content">
+        <div class="index_top box_shadow mt15 clearfix">
+                <div class="index_focus fl">
+                       
+                        <div id="focus">                             
+                            <ul>
+                                <li><a href="#" target="_blank"><img src="<{$public}>/images/focus/1.png" width="580" height="280" /></a></li>
+                                <li><a href="#" target="_blank"><img src="<{$public}>/images/focus/2.png" width="580" height="280" /></a></li>
+                                <li><a href="#" target="_blank"><img src="<{$public}>/images/focus/3.png" width="580" height="280" /></a></li>
+                                <li><a href="#" target="_blank"><img src="<{$public}>/images/focus/4.png" width="580" height="280" /></a></li>		 
+                            </ul>
+                        </div>
+                </div>
+                <div class="index_active fr">
+                        <h3 class="f16">热门<em class="red">活动</em></h3>
+                        <div class="hot_area">
+                                <div class="l_pic fl"> <a target="_blank" href="index.php?m=search&a=index&type=search&keywords=女生"><img alt="女生节小精灵有礼相送" src="<{$public}>/images/wenzhang.jpg"></a> </div>
+                                <div class="r_txt fl">
+                                        <h3 class="f14"><a target="_blank" href="index.php?m=search&a=index&type=search&keywords=女生" class="red">女生节小精灵有礼相送</a></h3>
+                                        <p class="des">2 女生节小精灵有礼相送2 女生节小精灵有礼相送2 女生节小精灵有礼相送2 女生节小精灵有礼相送</p>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="g_txt mt15">
+                                        <ul>
+                                                <li class="clearfix"> <b class="fl">1</b> <a class="fl f14" target="_blank" href="index.php?m=search&a=index&type=search&keywords=女生">女生节小精灵有礼相送</a> </li>
+                                                <li class="clearfix"> <b class="fl">2</b> <a class="fl f14" target="_blank" href="http://demo.pinphp.com/c-2">100套大牌护肤盒子免费试用</a> </li>
+                                                <li class="clearfix"> <b class="fl">3</b> <a class="fl f14" target="_blank" href="index.php?m=search&a=index&type=search&keywords=家居">50件金三塔真丝家居服免费试穿</a> </li>
+                                                <li class="clearfix"> <b class="fl">4</b> <a class="fl f14" target="_blank" href="index.php?m=search&a=index&type=search&keywords=心爱">100件Shinelove心爱FOR LOVER文胸免费试穿</a> </li>
+                                        </ul>
+                                </div>
+                        </div>
+                </div>
+        </div>
+		 <{foreach $cateList as $val}>
+        <div class="mt20 clearfix"> <span class="fr"><a target="_blank" class="gray" href="<{$app}>/cate/index/cid/<{$val.id}>"></a></span>
+               
+  			    <h2 class="fl"> <span style="font-size:12px;">爱美丽们分享的</span> <a target="_blank" href="<{$app}>/cate/index/cid/<{$val.id}>"><span class="red f16"><{$val.catename}></span></a></h2>
+                <ul class="guide_links fl">
+						<{foreach $val.sonList as $sonVal}>
+							<li><a target="_blank" href="<{$app}>/cate/index/cid/<{$sonVal.id}>" class="red"><{$sonVal.catename}></a></li>
+                        <{/foreach}>
+                </ul>
+				
+        </div>
+			<{foreach $val.sonList as $sonVal}>
+				<div class="cate_box alpha">
+					<div class="box_shadow mt15 group_box">
+							<div class="groupbg">
+									<h3 class="f16 bold"><a target="_blank" href="<{$app}>/cate/index/cid/<{$sonVal.id}>"><{$sonVal.catename}></a></h3>
+									<div class="mt5 cursor block g_db_bg">
+									  <a href="<{$app}>/cate/index/cid/<{$sonVal.id}>"><img src="<{$public}>/uploads/goods_cate/<{$sonVal.id}>.png"></a>
+									</div>
+									<div class="group_desc mt10"> <span class="follow_red_btn tc cursor fr"><a target="_blank" href="<{$app}>/cate/index/cid/<{$sonVal.id}>" class="white">去看看</a></span><span class="share_nums gray">0个宝贝</span> </div>
+									<div class="mt10"></div>
+							</div>
+					</div>
+				</div>
+				
+			<{/foreach}>
+			<div class="clearfix"></div>
+		<{/foreach}>
+		
+		
+		
+		
+		
+        <div class="clearfix"></div>
+        <!-- 九宫格结束　-->
+</div>
+<!-- start -->
+<div>
+        <div class="mt20 clearfix"><span class="fr"><a target="_blank" class="gray" href="?m=search"></a></span>
+                <h2 class="fl"><span style="font-size:12px;"></span><span class="red f16">每日精彩推荐</span></h2>
+				
+        </div>
+</div>
+<div class="item_list infinite_scroll" style="min-height:600px;">
+<{include file="public/goods_list.html"}>
+</div>
+<div id="more" class="center"><a href="#" hidefocus="true"></a></div>
+<div id="page" class="page mt20 clearfix" style="display: block;">
+	<span class="page_num"><{$page}></span>
+</div>
+<!-- end -->
+<{include file="public/footer.html"}> 
+

@@ -1,0 +1,43 @@
+<{include file="index/header.html"}>
+<form action="<{$url}>/do_add" method="post" name="myform" id="myform" enctype="multipart/form-data" style="margin-top:10px;">
+  <div class="pad-10">
+  <div class="col-tab">
+  <div id="div_setting_1" class="contentList pad-10">
+    <table width="100%" cellpadding="2" cellspacing="1" class="table_form">
+	  <tr>
+        <th width="100">焦点标题 :</th>
+        <td><input type="text" name="title" id="title" class="input-text" value="<{$focus_info.title}>"></td>
+      </tr>
+      <tr>
+      	<th>焦点图片 :</th>
+      	<td>
+        	<input type="file" name="picname" id="img" class="input-text"/>
+            <{if $focus_info.picname neq ''}>
+            <br /><img src="<{$public}>/uploads/focus/<{$focus_info.picname}>" />
+            <{/if}>
+        </td>
+      </tr>
+      <tr>
+		<td><input type="hidden" name="id" value="<{$focus_info.id}>" id="article_id"/></td>
+	  </tr>
+      <tr>
+        <th>审核状态 :</th>
+        <td><input type="radio" name="status" class="radio_style" value="1" <{if $focus_info.status eq 1}> checked<{/if}>>
+          &nbsp;已审核&nbsp;&nbsp;&nbsp;
+          <input type="radio" name="status" class="radio_style" value="0" <{if $focus_info.status eq 0}>  checked<{/if}>>
+          &nbsp;未审核&nbsp;&nbsp;&nbsp;
+          </td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="bk15"></div>
+  <div class="btn">
+    <input type="submit" value="提交" name="dosubmit" class="button" id="dosubmit">
+  </div>
+
+</div>
+</div>
+</form>
+</body>
+</html>

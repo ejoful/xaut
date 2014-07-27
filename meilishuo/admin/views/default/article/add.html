@@ -1,0 +1,30 @@
+<{include file="index/header.html"}>
+
+<form action="<{$url}>/do_add" method="post" name="myform" id="myform" style="margin-top:10px;">
+        <div class="pad-10">
+                <div class="col-tab">
+                        <div id="div_setting_1" class="contentList pad-10">
+                                <table width="100%" cellpadding="2" cellspacing="1" class="table_form">
+                                        <tbody id="item_body" >
+                                                <tr>
+                                                        <th width="100">文章标题 :</th>
+                                                        <td><input type="text" name="title" id="title" class="input-text" size="60" value="<{$article_info.title}>" /></td>
+                                                </tr>
+                                        </tbody>
+                                </table>
+                                <table width="100%" cellpadding="2" cellspacing="1" class="table_form">
+                                        <tr>
+                                                <th width="100">详细内容 :</th>
+                                                <td><textarea name="content"><{$article_info.content}></textarea><{$editor}></td>
+                                        </tr>
+                                </table>
+                        </div>
+                        <div class="bk15">
+                                <input type="hidden" name="id" value="<{$article_info.id}>" id="article_id"/>
+                        </div>
+                        <div class="btn"><input type="submit" value="提交" name="dosubmit" class="button" id="dosubmit"></div>
+                </div>
+        </div>
+</form>
+</body>
+</html>

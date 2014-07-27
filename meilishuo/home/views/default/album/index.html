@@ -1,0 +1,23 @@
+	<{include file="public/header.html"}>
+
+	<link rel="stylesheet" type="text/css" href="<{$res}>/css/album_index.css" />
+	<div class="content">
+		<div id="group_nav" class="clearfix">
+			
+			<{foreach $album_cate as $val}>
+				
+				<a href="<{$app}>/album/index/cid/<{$val.id}>"  <{if $cid == $val.id}>class="on"<{/if}>><{$val.catename}></a>
+			<{/foreach}>
+			<{if isset($uid)}>
+			<a href="#" target="_blank">我的杂志</a>
+			<{/if}>
+		</div>
+		<div class="album_index infinite_scroll clearfix" style="min-height: 200px;">
+                        <{* 专辑列表 *}>
+                        <{include file="album/album_list.html"}>
+		</div>
+		<div id="page" class="page mt20 clearfix" style="display: block;">
+			<span class="page_num"><{$page}></span><{* 分页 *}>
+		</div>
+	</div>
+        <{include file="public/footer.html"}>

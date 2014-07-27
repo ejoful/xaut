@@ -1,0 +1,118 @@
+<!--这是商品详情模板页-->
+<{include file="public/header.html"}>
+<script type="text/javascript">
+        var items_id="5";
+</script>
+<script type="text/javascript" src="<{$public}>/js/jquery/plugins/jquery.masonry.min.js"></script>
+<script type="text/javascript" src="<{$public}>/js/jquery/plugins/jquery.lazyload.js"></script>
+<div class="content">
+        <!--这里是顶部广告位，宽950px，高自定义-->
+        <div class="mt15">
+                <script src=""></script>
+        </div>
+        <!--顶部广告位结束-->
+        <div class="item_left fl">
+                <div class="single_item box_shadow mt15 clearfix">
+                        <dl class="twitter_top">
+                                <dt>
+                                        <a target="_blank" href="------">
+                                                <img src="<{$res}>/images/author/32_pinphp.jpg">
+                                        </a>
+                                </dt>
+                                <dd>
+                                        <span style="color:#ccc;" class="fr">11月 09日 00:14</span>
+                                        <a target="_blank" href="------" class="red">PinPHP</a>
+                                        <span class="gray">分享到</span>
+                                        <span><a target="_blank" href="---------" class="red f12">#行李箱#</a></span>
+                                </dd>
+                                <dd class="quote_goods_title break_word">我是个好人</dd>
+                        </dl>
+                        <!--商品详图-->
+                        <div class="item_pic">
+                                <a target="_blank" href="----------">
+                                        <img url="L1BpblBIUF9WMi4yMS9kYXRhL2l0ZW1zLzIwMTItMTEtMDkvYl81MDliZGE1ZTM0Yjk4LmpwZw==" class="encode_url">
+                                </a>
+                        </div>
+                        <!--商品详图结束-->
+                        <div class="item_detail">
+                                <div class="break_word">
+                                        <p class="item_title f14 bold">
+                                                <a target="_blank" href="连接到个人中心">标题</a>
+                                        </p>
+                                        <!--js特效：喜欢多少次-->
+                                        <p class="p_heart">
+                                                <a onClick="javascript:;" class="like_it cursor pop_comm" iid="5">
+                                                        <b class="red nums" id="like_num_5">0</b>
+                                                </a><br />
+                                        </p>
+                                        <!--js特效结束-->
+                                </div>
+                        </div>
+                        <div class="item_tags clearfix"></div>
+                        <div class="item_tags clearfix"><span class="fl">宝贝标签：</span></div>
+                        <!-- Baidu Button BEGIN -->
+                        <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare mt10" style="float:right;"><a class="bds_qzone"></a><a class="bds_tsina"></a><a class="bds_tqq"></a><a class="bds_renren"></a><span class="bds_more"></span></div>
+                        <script type="text/javascript" id="bdshare_js" data="type=tools" ></script>
+                        <script type="text/javascript" id="bdshell_js"></script>
+                        <script type="text/javascript">				
+                                /**
+				 * 在这里定义bds_config
+				 */
+				var bds_config = {
+					'bdPic':base64_decode("L1BpblBIUF9WMi4yMS9kYXRhL2l0ZW1zLzIwMTItMTEtMDkvYl81MDliZGE1ZTM0Yjk4LmpwZw==")//'请参考自定义分享出去的图片'
+				}				
+                                document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + new Date().getHours();
+                        </script>
+                        <!-- Baidu Button END -->
+                        <span class="fr mt15"><b class="red f14" id="comments_count">14</b>评论&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+                        <div class="clearfix"></div>
+                        <div id="items_comments" class="clearfix comments">
+                                <div class="arrow"></div>
+                                <textarea id="comments_box" class="comments_box" maxlength="300" def="对心爱的宝贝说几句话吧~！"></textarea>
+                                <div class="clearfix mt10"><a id="comments_btn" class="comments_btn" pid="5">评论</a></div>
+                                <div class="list_wrap"></div>
+                        </div>
+                </div>
+                <h3 class="f16 mt15">猜你喜欢 </h3>
+                <div class="detail_cate_recommend mt15 clearfix"></div>
+                <h3 class="f16 mt15">也许你还喜欢</h3>
+                <div class="detail_item_list infinite_scroll">
+                        <div class="item mt15 masonry_brick jq_corner" data-corner="7px" iid="5">
+                                <div class="item_t">
+                                        <div class="img tc"><a target="_blank" href="http://127.0.0.1/PinPHP_V2.21?a=index&m=item&id=5" hidefocus="true" rel="nofollow"><img alt="我是个好人" url="L1BpblBIUF9WMi4yMS9kYXRhL2l0ZW1zLzIwMTItMTEtMDkvbV81MDliZGE1ZTM0Yjk4LmpwZw==" style="display:inline;" class="encode_url"></a><span class="price">￥0.00</span>
+                                                <div class="btns"><a href="javascript:;" class="img_album_btn" iid="5"> 加入专辑 </a></div>
+                                        </div>
+                                        <div class="title"><span>我是个好人</span></div>
+                                </div>
+                                <div class="item_b clearfix">
+                                        <div class="items_likes fl"><a href="javascript:;" class="like_btn" iid="5" iurl="http://127.0.0.1/PinPHP_V2.21?a=index&m=item&id=5"></a><em class="red bold" id="like_num_5">0</em></div>
+                                        <div class="items_comment fr"><a href="http://127.0.0.1/PinPHP_V2.21?a=index&m=item&id=5#items_comments" target="_blank">评论</a><em class="red bold">(14)</em></div>
+                                </div>
+                        </div>
+                </div>
+                <!--发现更多-->
+                <div class="pager">
+                        <div class="more tc f16"><samp class="fl"><a href="http://127.0.0.1/PinPHP_V2.21?a=index&m=cate&cid=383" class="red">去#行李箱#查看更多分享&gt;&gt;</a></samp><span class="hua fl"></span></div>
+                </div>
+        </div>
+        <div class="item_right fr">
+                <h3 class="f16 mt15">所在杂志</h3>
+                <div class="box_shadow mt15 group_box">
+                        <div class="groupbg">
+                                <h3 class="f16 bold"><a target="_blank" href="http://127.0.0.1/PinPHP_V2.21?a=index&m=cate&cid=383">行李箱</a></h3>
+                                <div class="mt5 cursor block g_db_bg">
+                                        <ul>
+                                                <li ><a target="_blank" href="http://127.0.0.1/PinPHP_V2.21?a=index&m=item&id=5"><img url="L1BpblBIUF9WMi4yMS9kYXRhL2l0ZW1zLzIwMTItMTEtMDkvc181MDliZGE1ZTM0Yjk4LmpwZw==" class="pg_pic_s encode_url"></a></li>
+                                        </ul>
+                                </div>
+                                <div class="group_desc mt10"><span class="follow_red_btn tc cursor fr"><a target="_blank" href="http://127.0.0.1/PinPHP_V2.21?a=index&m=cate&cid=383" class="white">去看看</a></span><span class="share_nums gray">0个分享</span></div>
+                                <div class="mt10"></div>
+                        </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="mt15" style="width:226px; overflow:hidden;">
+                        <script language="javascript" src="http://127.0.0.1/PinPHP_V2.21?a=index&m=advert&id=5"></script>
+                </div>
+        </div>
+</div>
+<{include file="public/footer.html"}>

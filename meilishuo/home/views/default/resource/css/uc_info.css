@@ -1,0 +1,11 @@
+.celerity_menu {padding:10px 10px 10px 10px;min-height:400px;}
+ul,ol {list-style:none}
+.celerity_menu li {height:30px}
+.celerity_menu li a {display:block; height:30px; line-height:30px; font-size:14px;padding-left:10px;}
+.celerity_menu li a.on {background:#eee}
+/*.user_app .celerity_menu a.on, .user_app .celerity_menu a.on:visited {
+background-color: white;
+border-radius: 3px 0 0 3px;
+color: #193E5C;
+}*/
+

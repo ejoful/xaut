@@ -1,0 +1,14 @@
+<{* 通过PHP分配一个二维数组，title 代表专辑的名字，item_num 代表专辑的图片数量，src 代表整个专辑的合成图-相当于封面 *}>
+<{foreach $album_list as $val}>
+	<div class="album_item radius3 mt15 masonry_brick">
+		<div class="clearfix title">
+			<a class="left"	href="<{$app}>/album/details/id/<{$val.id}>/uid/<{$val.uid}>"><{$val.albumname}></a>
+			<span class="right"></span>		<!-- 专辑图片数量 -->
+		</div>
+		<div class="album_list">
+			<a href="<{$app}>/album/details/id/<{$val.id}>/uid/<{$val.uid}>" target="_blank">
+				<img src="<{$public}>/uploads/albums/<{$val.uid}>/<{$val.picname}>" />				
+			</a>
+		</div>
+	</div>
+<{/foreach}>

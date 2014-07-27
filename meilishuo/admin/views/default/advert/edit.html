@@ -1,0 +1,59 @@
+<{include file="index/header.html"}>
+<link rel="stylesheet" type="text/css" href="<{$public}>/js/calendar/calendar-blue.css"/>
+<script type="text/javascript" src="<{$public}>/js/calendar/calendar.js"></script>
+<div class="pad_10">
+        <form action="<{$url}>/do_edit" method="post" name="myform" id="myform">
+                <table width="100%" cellpadding="2" cellspacing="1" class="table_form">
+                        <tr>
+                                <th width="100">广告名称 :</th>
+                                <td><input type="text" name="title" id="module" class="input-text" value="<{$advert_info.title}>" /></td>
+                        </tr>
+                        <tr>
+                                <th width="100">广告代码 :</th>
+                                <td><textarea cols="40" rols="25" name="content" id="module" class="input-text"><{$advert_info.content}></textarea></td>
+                        </tr>
+                        <tr>
+                                <th>开始时间 :</th>
+                                <td>
+                                        <input type="text" name="start_time" id="start_time" class="date" size="22" <{if $advert_info.starttime neq ""}>value="<{date('Y-m-d H:i:s',$advert_info.starttime)}>"<{/if}> />
+                                        <script language="javascript" type="text/javascript">
+                                                Calendar.setup({
+                                                        inputField     :    "start_time",
+                                                        ifFormat       :    "%Y-%m-%d %H:%M:%S",
+                                                        showsTime      :    'true',
+                                                        timeFormat     :    "24"
+                                                });
+                                        </script>
+                                </td>
+                        </tr>
+                        <tr>
+                                <th>结束时间 :</th>
+                                <td>
+                                        <input type="text" name="end_time" id="end_time" class="date" size="22"  <{if $advert_info.endtime neq ""}>value="<{date('Y-m-d H:i:s',$advert_info.endtime)}>"<{/if}> />
+                                        <script language="javascript" type="text/javascript">
+                                                Calendar.setup({
+                                                        inputField     :    "end_time",
+                                                        ifFormat       :    "%Y-%m-%d %H:%M:%S",
+                                                        showsTime      :    'true',
+                                                        timeFormat     :    "24"
+                                                });
+                                        </script>
+                                </td>
+                        </tr>
+                        <tr>
+                                <th>状态 :</th>
+                                <td>
+                                        <input type="radio" name="status" class="radio_style" value="1" <{if $advert_info.status eq 1}> checked<{/if}>> &nbsp;有效&nbsp;&nbsp;&nbsp;
+                                               <input type="radio" name="status" class="radio_style" value="0" <{if $advert_info.status eq 0}> checked<{/if}>> &nbsp;禁用
+                                </td>
+                        </tr>
+                </table>
+                <input type="hidden" name="id" value="<{$advert_info.id}>" />
+                <input type="submit" name="dosubmit" id="dosubmit" class="dialog" value=" ">
+        </form>
+</div>
+<script>
+        $("select option[value=<{$advert_info.id}>]").attr('disabled','true').css('background','#ccc');
+</script>
+</body>
+</html>

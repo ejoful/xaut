@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+    <input name="title" type="notnull" msg="焦点图名不允许为空" />
+</form>

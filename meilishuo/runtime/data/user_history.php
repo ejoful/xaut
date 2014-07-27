@@ -1,0 +1,1 @@
+<?php {"pri":"id","0":"uid","1":"hid","2":"type","3":"content","4":"addtime","5":"status"}yes

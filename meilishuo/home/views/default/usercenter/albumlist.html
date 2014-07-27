@@ -1,0 +1,39 @@
+<br/>
+<{*本块全部是专辑列表*}>
+<{foreach $albumList as $key => $val}>
+    <div class="album_item album_goods radius7 mt15">
+        <div class="clearfix act" style="text-align:right;">
+		<{if ($type neq 'follow') and ($uid eq $loginuid)}>
+		<a href="<{$url}>/albumInfo/act/edit/id/<{$val.id}>" target="_blank">编辑</a>
+		|<a href="<{$url}>/albumInfo/act/del/uid/<{$uid}>/id/<{$val.id}>" onclick="{if(confirm('确定要删除整个专辑吗?')){return true;}return false;}">删除</a>
+		<{/if}>
+        </div>                
+      <{*   <a href="<{$app}>/album/details/id/<{$val.id}>/uid/<{$val.uid}>" target="_blank">*}>
+         <a href="<{$app}>/album/details/id/<{$val.id}>" target="_blank">
+                 <img src="<{$public}>/uploads/albums/<{$val.uid}>/<{$val.picname}>" /> 	
+         </a>
+        <div class="clearfix title">
+        	<div class="clearfix">
+                        <h3 class="left" title="<{$val.albumname}>" style="font-size:16px;"><{$val.name}></h3>
+                <div class="right">
+                    <div class="like left">
+                        <i><{$val.likesnum}></i>
+                        喜欢
+                    </div>
+                    <div class="comment left">
+                        <i><{$val.comments}></i>
+                        评论
+                    </div>
+                </div>            
+            </div>
+            <{if $type eq 'follow'}>
+            <div class="clearfix" style="line-height:20px;">
+                <a href="<{$url}>/index/uid/<{$val.uid}>" target="_blank" style="color:red;font-size:13px;">
+                        <img src="<{$res}>/images/userface/<{$val.face}>" class="avatar left"/>&nbsp;&nbsp;@<{$val.username}>
+              	</a>
+            </div>
+            <{/if}>
+        </div>
+    </div>
+<{/foreach}>
+<{*<{/foreach}>*}>

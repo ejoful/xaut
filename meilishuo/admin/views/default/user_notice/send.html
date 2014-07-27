@@ -1,0 +1,34 @@
+<{include file="index/header.html"}>
+<form action="<{$url}>/dosend" method="post" name="myform" id="myform" enctype="multipart/form-data" style="margin-top:10px;">
+  <div class="pad-10">
+  <div class="col-tab">
+  <div id="div_setting_1" class="contentList pad-10">
+    <table width="100%" cellpadding="2" cellspacing="1" class="table_form">
+	  <tr>
+        <th width="100">用户名 :</th>
+        <td><input type="text" name="touid" id="title" class="input-text" value="<{$user_notice_info.id}>"></td>
+      </tr>
+      <tr>
+      	<th>通知内容 :</th>
+      	<td>
+        	<textarea name="content" cols="50" rols="5" class="input-text">
+                <{$user_notice_info.content}>
+                </textarea>
+        </td>
+      </tr>
+      <tr>
+		<td><input type="hidden" name="id" value="<{$user_notice_info.id}>" id="notice_id"/></td>
+	  </tr>
+    </table>
+  </div>
+
+  <div class="bk15"></div>
+  <div class="btn">
+    <input type="submit" value="提交" name="dosubmit" class="button" id="dosubmit">
+  </div>
+
+</div>
+</div>
+</form>
+</body>
+</html>

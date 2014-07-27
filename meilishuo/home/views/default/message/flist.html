@@ -1,0 +1,11 @@
+<script type="text/javascript">
+	function getpage(url) {
+		$.post(url, {'act':'flist'}, function(data){
+				$('#flist').html(data);
+			})
+		}
+</script>
+<div class="list">
+	<{$list}>
+	<{$fpage}>
+</div>

@@ -1,0 +1,8 @@
+<div class="left_region">
+    <h3 class="account">我的账号</h3>
+    <ul>
+ 	<li <{if $actionName eq userbasic}>class="on"<{/if}>><a href="<{$url}>/userbasic">基本信息</a></li>
+        <li <{if $actionName eq userface}>class="on"<{/if}>><a href="<{$url}>/userface">修改头像</a></li>
+        <li <{if $actionName eq userpwd}>class="on"<{/if}>><a href="<{$url}>/userpwd">修改密码</a></li>
+    </ul>
+</div>

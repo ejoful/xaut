@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<input name="username" type="notnull" msg="用户名不能为空" />
+	<input name="username" type="unique" msg="用户名已经存在" />
+	<input name="email" type="unique" msg="该邮箱已经注册" />
+	<input name="username" type="length" value="3-20" msg="用户名长度必须在3-20位之间" />
+	<input name="email" type="email" msg="邮箱格式不正确" />
+	<input name="password" type="notnull" msg="密码不能为空" />
+	<input name="repassword" type="notnull" msg="密码不能为空" />
+	<input name="repassword" type="confirm" value="password" msg="两次密码不一致" />
+</form>

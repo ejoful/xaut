@@ -1,0 +1,67 @@
+<{include file="public/header.html"}>
+<{load href="<{$res}>/css/uc.css" }>   
+<{load href="<{$res}>/css/uc_info.css"}>
+<{load href="<{$public}>/css/dialog.css"}>
+<{load href="<{$res}>/js/my.js"}>
+<div class="middle">
+    <div class="uc clear-fix">
+	<{*	<{include file="usercenter/head.html"}>*}>
+        <div class="clearfix mt20">
+		<{*------------------------------------me--------------------------------------------*}>
+		<div class="uc_me radius7">
+			<div>
+				<a href="javascript:void(0)" onclick="sendmessage();" class="btn_b right" style="width:60px;height:28px;text-align:center;line-height:28px;background:url(<{$res}>/images/btn.gif) no-repeat left top; color:white;">发私信</a>
+				<ul class="follow_nav clearfix" style="clear:left;">
+					<li <{if $actionName eq 'followlist'}>class="on"<{/if}>><a href="<{$url}>/followlist/uid/<{$uid}>"><{if $uid eq $loginuid}>我<{else}>他<{/if}>的关注</a></li>
+					<li <{if $actionName eq 'fanslist'}>class="on"<{/if}>><a href="<{$url}>/fanslist/uid/<{$uid}>"><{if $uid eq $loginuid}>我<{else}>他<{/if}>的粉丝</a></li>
+				</ul>
+			</div>
+			<{*if empty($list) or empty($messArr)}>
+	                <span class="empty">看来主人刚入住哦，还没有她的动态~</span>
+			<{/if*}>
+			<{if $actionName eq 'followlist' or $actionName eq 'fanslist'}>
+                	<{*遍历打印关注列表*}>
+                	<{foreach $list as $val}>
+                	<div class="history_item clearfix">
+				<a class="left" href="<{$url}>/index/uid/<{$val.id}>" target="_blank">
+					<img src="<{$res}>/images/userface/<{$val.face}>" class="avatar"/>
+				</a>
+				<div class="left pl10">
+					<div class="clearfix">
+						<a href="<{$url}>/index/uid/<{$val.id}>" class="user_name left" target="_blank">
+							<{$val.username}>
+						</a>
+						<{if $val.id neq $loginuid}>
+						<span class="right">
+							<div class="add_follow <{if $val.isfollow eq 1}>yet<{/if}>" fans_id="<{$val.id}>">
+							</div>
+						</span>
+						<{/if}>
+					</div> 
+					<div class="history_content">
+						<{$val.fansnum}> 个粉丝
+					</div>  
+					<{*
+					<div class="history_content">
+						<{$val['last_history']}<br>({:date("n月j日   H:i:s",$val["last_time"])})
+					</div>
+					*}>
+				</div>
+			</div>
+			<{/foreach}>                
+			<{* *}>
+			
+			<{/if}>
+			<div id="page" class="page mt20 clearfix" style="display:block;">
+				<span class="page_num"><{$fpage}></span>
+			</div>
+		</div>
+		<{*-----------------------------------user_info---------------------------------------------*}>
+		<{*  <div class="right">*}>
+			<div style="float:left;">
+				<{include file="usercenter/userinfo.html"}> 
+			</div>			                        
+		</div>
+	</div>
+</div>
+<{include file="public/footer.html"}> 

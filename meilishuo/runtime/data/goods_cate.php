@@ -1,0 +1,1 @@
+<?php {"pri":"id","0":"catename","1":"pid","2":"status","3":"likesnum","4":"ishot","5":"assem"}yes

@@ -1,0 +1,66 @@
+<{include file="public/header.html"}>
+<{load href="<{$public}>/css/wwm.css"}>
+<div class="content">
+ 
+<{if $type eq 'search'}>   
+    <div class="search_top box_shadow mt15">
+        <div class="search_box">
+            <form method="get" action="<{$app}>/search/index/type/search" onsubmit="return check_search(this);">
+					<input type="text" value="<{$keywords}>" name="keywords" id="keyword" class="fl">
+					<input type="submit" value="搜索" id="search_btn" class="white tc fl cursor">
+			</form>
+        </div>
+    </div>
+	<div id="wwm_search_result">
+		    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		    搜索“<span class="red"><{$keywords}></span>”相关的内容：
+		    <span><a><{$gtotal}> 宝贝</a> | </span>
+		    <span><a href="<{$app}>/search/user_list/keywords/<{$keywords}>"><{$userResults}>  用户</a></span>
+	</div>	
+<{/if}>   
+ 
+    <div class="search_result">
+        <{if count($goodsResults) eq 0}>
+				<div class="no_result break_word mt15">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						很抱歉，没有找到与“<span class="keyword"><{$keywords}></span>”相关的宝贝
+                </div>               
+		<{/if}>
+            <div class="item_list infinite_scroll">  
+ 
+<{if $type eq 'guang'}>	
+		<div class="box_shadow masonry_brick mt15" style="position: absolute; top: 0px; left: 0px;">
+				<div class="catalog search_catalog clearfix">
+						<div class="catalog_item">
+								<h3>社区热荐</h3>
+								<div class="clearfix">
+										<a href="<{$app}>/search/index/type/guang/order/hot" class="<{if ($sortby eq 'hot') }>bg_red<{/if}> jq_corner" data-corner="10px">最热门</a>
+										<a href="<{$app}>/search/index/type/guang/order/push" class="<{if $sortby eq 'push'}>bg_red<{/if}> jq_corner" data-corner="10px">推荐</a>
+										<a href="<{$app}>/search/index/type/guang" class="<{if $sortby eq ''}>bg_red<{/if}> jq_corner" data-corner="10px">最新</a>
+								</div>
+						</div>    
+						<div class="catalog_item">
+								<h3>热门搜索</h3>
+								<div class="clearfix">
+										<{$search_kwords = explode(',', $search_words)}>
+										<{foreach $search_kwords as $kval}>
+										<a href="<{$app}>/search/index/type/guang/keywords/<{$kval}>" 
+										   class="<{if $keywords eq $kval}>bg_red<{/if}> jq_corner" 
+										   data-corner="10px"><{$kval}>
+										</a>
+										<{/foreach}>
+								</div>
+						</div>                                	
+				</div>
+		</div>
+<{/if}>
+
+				<{include file="public/goods_list.html"}>
+            </div>
+           
+			 <{if $page neq ''}><div id="page" class="page mt20" style="display: block;"><div class="page_num"><{$page}></div></div><{/if}>
+    </div>
+
+</div>
+
+<{include file="public/footer.html"}>

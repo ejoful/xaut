@@ -1,0 +1,35 @@
+<div id="uc_head">
+	<div class="top">
+        <table style="width:100%;">
+            <tr>
+				<td style="width:120px;"><img src="<{$res}>/images/userface/<{$userface}>" class="avatar"/></td>
+				<td valign="top"><h1><{$uname}></h1>
+                	<{if $uid eq $loginuid}>
+                             <a href="<{$app}>/usercenter/userbasic" class="uc_home_link">个人资料&nbsp;&nbsp;(设置)</a>
+                   	<{else}>
+                             <div class="add_follow <{if $is_follow eq 1}>yet<{/if}>" fans_id="<{$uid}>"></div>
+                    <{/if}>
+                </td>
+                <td class="collect_list_wrap"  valign="top">
+                    <div class="right">
+                        <div class="collect_list"> 
+                            <a href="<{$app}>/usercenter/followlist/uid/<{$uid}>"><{$follownum}><br>
+                            <span>关注</span> </a>
+                        </div>
+                        <div class="collect_list" style="border:0px;"> 
+                            <a href="<{$app}>/usercenter/fanslist/uid/<{$uid}>"><{$fansnum}><br>
+                            <span>粉丝</span> </a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>    
+    </div>
+
+    <div class="nav clear-fix">
+            <a href="<{$app}>/usercenter/index/uid/<{$uid}>" <{if $actionName eq index}>class="current"<{/if}>>首页动态</a>         
+            <a href="<{$app}>/usercenter/album/uid/<{$uid}>" <{if ($actionName eq album) or ($actionName eq createalbum)}>class="current"<{/if}>>专辑</a>
+            <a href="<{$app}>/usercenter/likeslist/uid/<{$uid}>" <{if $actionName eq likeslist}>class="current"<{/if}>>喜欢</a>
+            <a href="<{$app}>/usercenter/sharelist/uid/<{$uid}>" <{if ($actionName eq sharelist) or ($actionName eq sharegoods)}>class="current"<{/if}>>分享</a>
+    </div>
+</div>

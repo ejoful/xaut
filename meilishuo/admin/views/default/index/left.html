@@ -1,0 +1,26 @@
+<{foreach $menu as $item}>
+<h3 class="f14">
+	<span class="switchs cu on" title="<{$lang.expand_or_contract}>"></span><{$item.m.name}>
+</h3>
+<ul>
+	<{foreach $item['a'] as $nav}>
+	<li id="_MP<{$nav.id}>" class="sub_menu">
+		<a href="javascript:_MP(<{$nav.id}>,'<{$nav.url}>');" hidefocus="true" style="outline:none;"><{$nav.name}></a>
+	</li>
+	<{/foreach}>
+</ul>
+<{/foreach}>
+<script type="text/javascript">
+	$(".switchs").each(function(){//function(i)
+		var ul = $(this).parent().next();
+		$(this).click(function(){
+			if(ul.is(':visible')){
+				ul.hide();
+				$(this).removeClass('on');
+			}else{
+				ul.show();
+				$(this).addClass('on');
+			}
+		})
+	});
+</script>

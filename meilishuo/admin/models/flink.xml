@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+    <input name="title" type="notnull" msg="友情链接名不允许为空" />
+    <input name="url" type="notnull" msg="网站地址不能为空" />
+    <input name="whois" type="notnull" msg="站长联系方式不能为空" />
+</form>

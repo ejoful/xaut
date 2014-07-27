@@ -1,0 +1,119 @@
+<{include file="index/header.html" }>
+<div class="pad-10" >
+<{*---------------搜索用户---------------------------*}>
+    <form name="searchform" action="" method="get" >
+    <table width="100%" cellspacing="0" class="search-form">
+        <tbody>
+            <tr>
+            <td>
+            <div class="explain-col">
+				关键字 :
+                <input name="keyword" type="text" class="input-text" size="25" value="<{$keyword}>" />
+                <input type="hidden" name="m" value="user" />
+                <input type="submit" name="search" class="button" value="搜索" />
+        	</div>
+            </td>
+            </tr>
+        </tbody>
+    </table>
+    </form>
+<{*---------------用户列表---------------------------*}>
+        <form id="myform" name="myform" action="<{$app}>/user/delete" method="post" onsubmit="return check();">
+    <div class="table-list">
+    <table width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th width=40><{$Think.lang.orders}></th>
+                <th width=15><input type="checkbox" value="" id="check_box" onclick="selectall('id[]');"></th>
+                <th width="40">ID</th>
+                <th width=40>头像</th>                
+                <th>昵称</th>
+                <th>Email</th>
+                <th width=30>性别</th>
+                <th>生日</th>
+                <th>地址</th>
+                <th width=120>注册时间</th>
+                <th width=120>最后登录</th>
+                <th width=30>审核</th>
+            </tr>
+        </thead>
+    	<tbody>
+        <{foreach $user_list as $val}>
+        <tr>
+            <td align="center"><{$val.key}></td>
+            <td align="center"><input type="checkbox" value="<{$val.id}>" name="id[]"></td>
+            <td><{$val.id}></td>
+           <td>
+            <{if $val.img eq ''}>
+                    <img src="<{$public}>/admin/images/avatar-60.png" width="40px" height="40px"/>
+            <{else}>
+                    <img src="<{$val.img}>" width="40px" height="40px"/>                        
+            <{/if}>
+           </td>
+                                <{*----这里是点击用户名称要弹出编辑该用户的JS框-----*}>
+           <td align="center"><a href="javascript:edit(<{$val.id}>,'<{$val.username}>')"><em class="blue"><{$val.username}></em></a></td>
+           <td  align="center"><{$val.email}></td>
+           <td align="center">
+           <{if $val.sex eq '1'}>
+           男
+           <{elseif $val.sex eq '0'}>
+           女
+           <{else}>
+           保密
+           <{/if}>
+           </td>
+           <td align="center"><{$val.birthday}></td>
+           <td align="center"><{$val.address}></td>
+           <td align="center"><{date("Y-m-d   H:i:s",$val["regtime"])}><br></td>
+		   <td align="center"><{date("Y-n-j   H:i:s",$val["logintime"])}><br><font color=green>(<{$val.loginip}>)</font></td>
+                   <td align="center" onclick="status(<{$val.id}>,'status', <{$val.status}>)" id="status_<{$val.id}>"><img src="<{$public}>/images/status_<{$val.status}>.gif" /></td>
+        <{/foreach}>
+    	</tbody>
+    </table>
+    <div class="btn">
+    	<label for="check_box" style="float:left;">全选/取消</label>
+        <input type="submit" class="button" name="dosubmit" value="删除" onclick="return confirm('您真的要删除用户?')" style="float:left;margin:0 10px 0 10px;"/>
+    	<div id="pages"><{$page}></div>
+    </div>
+    </div>
+    </form>
+</div>
+
+<script language="javascript">
+        //id : 用户ID    name:用户username
+function edit(id, name) {
+	var lang_edit = "编辑用户";
+	window.top.art.dialog({id:'edit'}).close();
+	window.top.art.dialog({title:lang_edit+'--'+name,id:'edit',iframe:'<{$app}>/user/edit/id/'+id,width:'450',height:'500'}, 
+		function(){
+			var d = window.top.art.dialog({id:'edit'}).data.iframe;
+			d.document.getElementById('dosubmit').click();
+			return false;
+		}, 
+		function(){
+			window.top.art.dialog({id:'edit'}).close();
+		}
+	);
+}
+function check(){
+	if($("#myform").attr('action') == '<{$app}>/goods/delete') {
+		var ids='';
+		$("input[name='id[]']:checked").each(function(i, n){
+			ids += $(n).val() + ',';
+		});
+		if(ids=='') {
+			window.top.art.dialog({content:lang_please_select+lang_cate_name,lock:true,width:'200',height:'50',time:1.5},function(){});
+			return false;
+		}
+	}
+	return true;
+}
+function status(id,type,$status){
+         $.get("<{$app}>/user/status", { id: id, type: type, status:$status }, function(data){
+                $("#"+type+"_"+id).attr('onclick', "status("+id+",'status',"+data+")");
+		$("#"+type+"_"+id+" img").attr('src', '<{$public}>/images/status_'+data+'.gif')
+	}); 
+}
+</script>
+</body>
+</html>

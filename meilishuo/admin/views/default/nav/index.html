@@ -1,0 +1,121 @@
+<{include file="index/header.html"}>
+<div class="pad-10" >
+        <form id="myform" name="myform" action="<{$url}>/delete" method="post" onsubmit="return check();">
+                <div class="table-list">
+                        <table width="100%" cellspacing="0">
+                                <thead>
+                                        <tr>
+                                                <th width="4%"><input type="checkbox" value="" id="check_box" onclick="selectall('id[]');"></th>
+                                                <th width="200">分类名称</th>
+                                                <th width="80">分类ID</th>
+                                                <th width="80">assem</th>
+                                                <th>eng</th>
+                                                <th>类型</th>
+                                                <th width="40">状态</th>
+                                                <th width="120">操作</th>
+                                        </tr>
+                                </thead>
+                                <tbody>
+                                        <{foreach $nav_list as $id=>$val}>
+                                        <{$val.level=count(explode("-",$val["assem"]))}>
+                                        <tr class="<{$cls[$val.id]}>" iid="<{$id}>" pid="<{$val.pid}>" level="<{$val.level}>">
+                                                <td align="center"><input type="checkbox" value="<{$val.id}>" name="id[]"></td>
+                                                <td>
+                                                        <div style="margin-left:<{$val.level * 30}>px">
+                                                                <img src="<{$public}>/admin/images/tv-collapsable.gif" class="expandable" id="<{$val.id}>" pid="<{$val.pid}>" level="<{$val.level}>"/>
+                                                                <span style="color:<{$val.color}>;"><{$val.name}></span>
+                                                        </div>
+                                                </td>
+
+                                                <td align="center"><{$val.id}></td>
+                                                <td align="left" style="padding-left:40px"><{$val.assem}></td>
+                                                <td align="center"><{$val.eng}></td>
+                                                <td align="center"><{if $val.groupid eq 0}>全局导航<{elseif $val.groupid eq 1}>组菜单<{elseif $val.groupid eq 2}>控制器<{else}>方法<{/if}></td>
+                                                <td align="center" onclick="status(<{$val.id}>,<{$val.status}>)" id="status_<{$val.id}>"><img src="<{$public}>/images/status_<{$val.status}>.gif" /></td>
+                                                <td align="center"><a class="blue" href="javascript:edit(<{$val.id}>,'<{$val.name}>')">编辑</a></td>
+                                        </tr>
+                                        <{/foreach}>
+                                </tbody>
+                        </table>
+
+                        <div class="btn">
+                                <label for="check_box">全选/取消</label>
+                                <input type="submit" class="button" name="dosubmit" value="删除" onclick="return confirm('确定删除么？')"/>
+                        </div>
+
+                </div>
+        </form>
+</div>
+<script type="text/javascript">
+        function edit(id, name) {
+
+                var lang_edit = "编辑";
+
+                window.top.art.dialog({
+                        id:'edit'
+                }).close();
+
+                window.top.art.dialog({
+                        title:lang_edit+'--'+name,
+                        id:'edit',
+                        iframe:'<{$url}>/edit/id/'+id,
+                        width:'500',
+                        height:'480'
+                }, function(){
+                        var d = window.top.art.dialog({
+                                id:'edit'
+                        }).data.iframe;
+                        d.document.getElementById('dosubmit').click();
+                        return false;
+                }, function(){
+                        window.top.art.dialog({
+                                id:'edit'
+                        }).close()
+                });
+
+        }
+        $(function(){
+                $('.expandable').toggle(
+                function(){
+
+                        $('.sub_'+$(this).attr('id')).hide();
+                        $(this).attr('src','<{$public}>/admin/images/tv-expandable.gif');
+                },
+                function(){
+                        $('.sub_'+$(this).attr('id')).show();
+                        $(this).attr('src','<{$public}>/admin/images/tv-collapsable.gif');
+                }
+        );
+        });
+
+        var lang_items_cate_name = "请选择分类名称";
+        function check(){
+                if($("#myform").attr('action') == '<{$url}>/delete') {
+                        var ids='';
+                        $("input[name='id[]']:checked").each(function(i, n){
+                                ids += $(n).val() + ',';
+                        });
+
+                        if(ids=='') {
+                                window.top.art.dialog({
+                                        content:lang_items_cate_name,
+                                        lock:true,
+                                        width:'200',
+                                        height:'50',
+                                        time:1.5
+                                },function(){});
+                                return false;
+                        }
+                }
+                return true;
+        }
+        function status(id,status){
+                $.get("<{$url}>/status", { id: id, type: status }, function(jsondata){
+                        var data = jsondata;
+                        $("#status_"+id+" img").attr('src', '<{$public}>/images/status_'+data+'.gif');
+                        $("#status_"+id).attr('onclick', 'status('+id+','+data+')');
+                });
+        }
+</script>
+</body>
+</html>

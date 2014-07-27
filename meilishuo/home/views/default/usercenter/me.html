@@ -1,0 +1,48 @@
+<{include file="public/header.html"}>
+<{load href="<{$res}>/css/uc.css" }>  
+
+<div class="middle">
+    <div class="uc clear-fix">
+		<{include file="uc/head.html"}>
+        <div class="clearfix mt20">
+<{*------------------------------------me--------------------------------------------*}>
+            <div class="uc_me radius7">
+            	<{if empty($history_list)}>
+	                <span class="empty">看来主人刚入住哦，还没有她的动态~</span>
+                <{/if}>
+                
+                <br/>------------------>用户最新动态
+                
+                <{*下面是用户动态中要遍历出的最近动态内容
+                <volist name="history_list" id="val">
+                	<div class="history_item clearfix">
+                    	<a class="left" href="{:uc('uc/index')}">
+                        	<img src="{:uimg($val['simg'])}" class="avatar"/>
+                        </a>
+                        <div class="left pl10">
+                        	<div class="clearfix">
+	                            <a href="{:uc('uc/index')}" class="user_name left">{$val.name}</a>
+                                <span class="right history_time">{:date("n月j日   H:i:s",$val["add_time"])}</span>
+                            </div>
+    
+                            <div class="history_content">
+                            	{$val['info']}
+                            </div>
+                        </div>
+                    </div>
+                </volist>
+                *}>
+                
+                
+                <div id="page" class="page mt20 clearfix" style="display:block;">
+                    <span class="page_num">#</span>
+                </div>
+            </div>
+<{*-----------------------------------user_info---------------------------------------------*}>  
+			<div class="right">
+            	<{include file="uc/user_info.html"}> 
+            </div>			                        
+        </div>
+    </div>
+</div>
+<{include file="public/footer.html"}> 

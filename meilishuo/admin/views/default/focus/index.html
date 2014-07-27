@@ -1,0 +1,65 @@
+<{include file="index/header.html"}>
+<div class="pad-10" >
+
+        <form id="myform" name="myform" action="<{$url}>/delete" method="post" onsubmit="return check();">
+                <div class="table-list">
+                        <table width="100%" cellspacing="0">
+                                <thead>
+                                        <tr>
+                                                <th width=25><input type="checkbox" value="" id="check_box" onclick="selectall('id[]');"></th>
+                                                <th width=40>ID</th>
+                                                <th width=60>焦点图片</th>
+                                                <th>资讯标题</th>
+                                                <th width=40>状态</th>
+                                                <th width=40>操作</th>
+                                        </tr>
+                                </thead>
+                                <tbody>
+                                        <{foreach $focus_list as $val}>
+                                        <tr>
+                                                <td align="center"><input type="checkbox" value="<{$val.id}>" name="id[]"></td>
+                                                <td align="center"><{$val.id}></td>
+                                                <td align="center"><notempty name="val.picname"> <img src="<{$public}>/uploads/focus/<{$val.picname}>" style="border: 1px solid #999999;padding:1px;width:60px;height:30px;" /></notempty></td>
+                                <td align="center"><{$val.title}></td>
+                                <td align="center" onclick="status(<{$val.id}>,'status')" id="status_<{$val.id}>"><img src="<{$public}>/images/status_<{$val.status}>.gif"/></td>
+                                <td align="center"><a class="blue" href="<{$url}>/add/id/<{$val.id}>">编辑</a></td>
+                                <{/foreach}>
+                                </tbody>
+                        </table>
+                        <div class="btn">
+                                <label for="check_box" style="float:left;">全选/取消</label>
+                                <input type="submit" class="button" name="dosubmit" value="删除" onclick="return confirm('确认删除吗？')" style="float:left; margin:0 10px 0 10px;"/>
+                        </div>
+                </div>
+        </form>
+</div>
+<script language="javascript">
+        function edit(id, name) {
+                var lang_edit = "编辑";
+                window.top.art.dialog({id:'edit'}).close();
+                window.top.art.dialog({title:lang_edit+'--'+name,id:'edit',iframe:'?m=focus&a=edit&id='+id,width:'550',height:'400'}, function(){var d = window.top.art.dialog({id:'edit'}).data.iframe;d.document.getElementById('dosubmit').click();return false;}, function(){window.top.art.dialog({id:'edit'}).close()});
+        }
+        var lang_cate_name = "焦点图";
+        function check(){
+                if($("#myform").attr('action') == '{:u("items/delete")}') {
+                        var ids='';
+                        $("input[name='id[]']:checked").each(function(i, n){
+                                ids += $(n).val() + ',';
+                        });
+
+                        if(ids=='') {
+                                window.top.art.dialog({content:lang_please_select+lang_cate_name,lock:true,width:'200',height:'50',time:1.5},function(){});
+                                return false;
+                        }
+                }
+                return true;
+        }
+        function status(id,type){
+                $.get("<{$url}>/status", { id: id, type: type }, function(jsondata){
+                        var data = jsondata;
+                        $("#status_"+id+" img").attr('src', '<{$public}>/images/status_'+data+'.gif');
+                        $("#status_"+id).attr('onclick', 'status('+id+','+data+')');
+                });
+        }
+</script>
+</body></html>

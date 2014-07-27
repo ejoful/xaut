@@ -1,0 +1,1 @@
+<?php {"pri":"id","0":"albumname","1":"addtime","2":"uid","3":"picname","4":"albumcid","5":"description","6":"status","7":"recommend"}yes

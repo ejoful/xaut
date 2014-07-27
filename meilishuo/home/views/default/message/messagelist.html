@@ -1,0 +1,121 @@
+<{include file="public/header.html"}>
+<{load href="<{$res}>/css/uc.css" }>   
+<{load href="<{$res}>/css/uc_info.css"}>
+<{load href="<{$public}>/css/dialog.css"}>
+<{load href="<{$res}>/js/my.js"}>
+<div class="middle">
+    <div class="uc clear-fix">
+	<{*	<{include file="usercenter/head.html"}>*}>
+        <div class="clearfix mt20">
+		<{*------------------------------------me--------------------------------------------*}>
+		<div class="uc_me radius7">
+			<div>
+				<a href="javascript:void(0)" onclick="sendmessage();" class="btn_b right" style="width:60px;height:28px;text-align:center;line-height:28px;background:url(<{$res}>/images/btn.gif) no-repeat left top; color:white;">发私信</a>
+				<ul class="follow_nav clearfix" style="clear:left;">
+					<li <{if $actionName eq 'index'}>class="on"<{/if}>><a href="<{$url}>/index/uid/<{$uid}>">我的私信</a></li>
+					<li <{if $actionName eq 'atme'}>class="on"<{/if}>><a href="<{$url}>/atme/uid/<{$uid}>">@提到我的</a></li>
+					<li <{if $actionName eq 'notice'}>class="on"<{/if}>><a href="<{$url}>/notice/uid/<{$uid}>">我的通知</a></li>
+				</ul>
+			</div>
+			<{*if empty($list) or empty($messArr)}>
+	                <span class="empty">看来主人刚入住哦，还没有她的动态~</span>
+			<{/if*}>
+                	        
+			<{* *}>
+			<{*遍历私信列表*}>
+			<{foreach $messArr as $val}>
+			<div class="history_item clearfix">
+				<a class="left" href="<{$url}>/index/uid/<{$val.fromuid}>" target="_blank">
+					<img src="<{$res}>/images/userface/<{$val.face}>" class="avatar"/>
+				</a>
+				<div class="left pl10">
+					<{**}>
+					<div class="right">
+						<{$val.addtime|date_format:'%Y-%m-%d %H:%M:%S'}><br>
+						<{* 私信列表详细 *}>
+						<{if $list neq 'details' and $actionName eq 'index'}>
+						<a href="<{$url}>/index/list/details/id/<{$val.id}>" style="display:inline-block;">共 <{$val.messnum}> 条私信 | </a>
+						<{/if}>
+						<{*评论*}>
+						<{if $list neq 'details' and $actionName eq 'atme'}>
+						<a href="<{$app}>/goods/index/id/<{$val.gid}>" style="display:inline-block;">查看 | </a>
+						<{/if}>
+						<{*if $val.fromuid neq $loginuid*}>
+						<{if $actionName neq 'notice'}>
+						<a href="javascript:void(0)" class="reply" style="text-align:right;display:inline-block;">回复</a>
+						<{/if}>
+						<{*/if*}>
+					</div>
+					<{* *}>
+					<div class="history_content" id="info">
+						<{*---------------------------------index-------------------------------------------*}>
+						<{if $actionName eq 'index'}>
+						<a href="<{$url}>/index/uid/<{$val.fromuid}>" class="user_name uname left" target="_blank">
+							<{$val.username}>
+						</a>
+						对
+						<a href="<{$url}>/index/uid/<{$val.touid}>" class="user_name uname" target="_blank">
+							@<{$val.touname}>
+						</a>
+						说：&nbsp;<span style="color:#000"><{$val.content}></span>
+						<{/if}>
+
+						<{*------------------------------------atme----------------------------------------*}>
+						<{if $actionName eq 'atme'}>
+						<a href="<{$url}>/index/uid/<{$val.fromuid}>" class="user_name uname left" target="_blank">
+							<{$val.username}>
+						</a>
+						<{if !empty($val.reply_comment)}>
+						回复
+						<a href="<{$url}>/index/uid/<{$val.touid}>" class="user_name uname" target="_blank">
+							@<{$val.touname}>
+						</a>
+						<{/if}>
+						：&nbsp;<span style="color:#000"><{$val.content}></span>
+						<input type="hidden" name="reply_comment_id" class="reply_comment_id" value="<{$val.id}>" />
+						<input type="hidden" name="gid" class="gid" value="<{$val.gid}>" />
+						<{/if}>
+
+						<{*------------------------------------notice----------------------------*}>
+						<{if $actionName eq 'notice'}>
+						<{if $val.type eq 1}>
+						<span style="color:#000;font-size:14px;">@<{$val.content}>&nbsp;关注了您</span>
+						<{/if}>
+						<{/if}>
+						<{*-----------------------------------------------------------------------*}>
+						<{*--------------------------++++++++++--------------------------------*}>
+						<{*if $val.id neq $loginuid}>
+						<span class="right">
+							<div class="add_follow <{if $val.isfollow eq 1}>yet<{/if}>" fans_id="<{$val.id}>">
+							</div>
+						</span>
+						<{/if*}>
+						<{*-----------------++++++++-----------------*}>
+					</div> 
+					<{*在评论列表显示*}>
+					<{if $actionName eq 'atme'}>
+					<div class="history_content">
+						&nbsp;<{$val.title}> <{if $val.reply_comment_id gt 0}>："回复@<a href="<{$url}>/index/uid/<{$val.fromuid}>" style="color:#FF69A2;"><{$val.username}></a>：<{$val.reply_comment}>"<{/if}>
+					</div> 
+					<{/if}>
+				</div>
+				<div style="text-align:center;display:none;">
+					<textarea style="width:500px;height:60px;" cols="100" rows="4"></textarea>
+					<br/>
+					<input type="button" value="回复" class="send_reply" name="reply" style="margin:5px 0 0 480px;background:url(<{$res}>/images/btn.gif) no-repeat left top;width:60px;height:28px;border:0;" />
+				</div>
+			</div>
+			<{/foreach}>
+			<div id="page" class="page mt20 clearfix" style="display:block;">
+				<span class="page_num"><{$fpage}></span>
+			</div>
+		</div>
+		<{*-----------------------------------user_info---------------------------------------------*}>
+		<{*  <div class="right">*}>
+			<div style="float:left;">
+				<{include file="usercenter/userinfo.html"}> 
+			</div>			                        
+		</div>
+	</div>
+</div>
+<{include file="public/footer.html"}> 

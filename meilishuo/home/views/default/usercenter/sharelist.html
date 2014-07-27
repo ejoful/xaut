@@ -1,0 +1,92 @@
+<{include file="public/header.html"}>
+<{load href="<{$res}>/css/uc.css" }>   
+
+<div class="uc clearfix">
+    <{include file="usercenter/head.html"}>
+   	<{if $uid eq $loginuid}>    	
+    <div class="clearfix album mt20" style="margin-bottom: 10px;padding:0px;width:100%;">
+        <a class="upload left" href="<{$app}>/usercenter/sharegoods">分享我的宝贝</a>
+        <ul class="item_order left">
+        	<li><i>排序：</i></li>
+            <li><a <{if $order eq 'id'}>class="current"<{/if}> href="<{$url}>/sharelist/order/id">最新</a></li>
+            <li><a <{if $order eq 'like'}>class="current"<{/if}> href="<{$url}>/sharelist/order/like">最热</a></li>
+            <li><a <{if $order eq 'price'}>class="current"<{/if}> href="<{$url}>/sharelist/order/price">价格</a></li>
+        </ul>
+    </div>
+    <{/if}>
+    
+<{*--------------------------------------------------------------------------------------------*}>             
+        <div class="item_list infinite_scroll like_list" style="min-height:200px; margin-top:50px;">
+        	<{if !empty($shareList)}>
+                
+                    <{*  volist 遍历的是宝贝列表  *}> 
+	            <{foreach $shareList as $val}>
+                                <div class="item mt15 masonry_brick jq_corner" data-corner="7px" iid="<{$val.id}>">
+				        <div class="item_t">
+				            <div class="img tc"> 
+                                                    <a target="_blank" href="<{$app}>/goods/index/id/<{$val.id}>" hidefocus="true" rel="nofollow">
+                                                            <img alt="<{$val.goodsname}>" class="mysrc" src="<{$public}>/uploads/goods/thumb_m/<{$val.addtime|date_format:'%Y-%m-%d'}>/<{$val.picname}>" style="display:inline;">
+				            	</a>
+				                <span class="price">￥<{$val.price}></span> 
+				                <div class="btns">
+                                                        <a href="javascript:;" class="img_album_btn" iid="<{$val.id}>">加入专辑</a>
+                                                        <{*<a href="<{$app}>/usercenter/delgoods/id/<{$val.id}>" class="del_btn" onclick="{if(confirm('确定要删除分享吗?')){return true;}return false;}">删除</a>              *}>
+				                </div>
+				         	</div>
+				            <div class="title">
+				                <span><{$val.goodsname}></span>
+				            </div>
+				        </div>
+				        <div class="item_b clearfix">
+				            <div class="items_likes fl"> 
+                                                    <a href="javascript:;" class="like_btn" iid="<{$val.id}>" iurl="<{$app}>/goods/index/id/<{$val.id}>"></a>
+                                                    <em class="red bold" id="like_num_<{$val.id}>"><{$val.likesnum}></em> 
+				            </div>
+				            <div class="items_comment fr">
+				            	<a href="<{$app}>/goods/index/id/<{$val.id}>" target="_blank">评论</a>
+				                <em class="red bold">(<{$val.comments}>)</em>
+				            </div>
+				        </div>  
+						<{*------------------------------------------------------------------------------------------------------*}>
+						<{if !empty($val.username)}>
+								<div class="user clearfix">
+									<div class="clearfix">
+										<div class="avatar">
+                                                                                        <img src="<{$res}>/images/userface/<{$val.face}>" width="20px" height="20px"/> 
+										</div>                
+										<div class="user_info">
+                                                                                        <a href="<{$app}>/usercenter/index/uid/<{$val.uid}>"><em>@<{$val.username}></em></a>
+											<span>
+											<{*	<if condition="$val.remark_status eq 1">
+													<{$val.description}>
+												</if>
+                                                                                        *}>
+											</span>
+										</div>
+									</div>
+								</div>   
+						<{/if}>         
+						<{*------------------------------------------------------------------------------------------------------*}>        
+				    </div>
+				<{/foreach}>
+                                <{**}>
+			<{else}>                
+				<div class="home_empty">
+					<span class="des">还没有分享宝贝哦~</span>
+              	</div>            	
+            <{/if}>
+        </div>
+        <{if $show_sp eq 1}>
+            <div id="more" class="center">
+                <a href="<{$app}>/uc/share/sp/2/cid/<{$cid}>/p/<{$p}>" hidefocus="true"></a>
+            </div>    	
+        <{/if}> 
+        <{if $fpage neq ''}>
+            <div id="page" class="page mt20 clearfix" style="display: block;">
+                <span class="page_num"><{$fpage}></span>
+            </div>
+         <{/if}>  
+<{*--------------------------------------------------------------------------------------------*}>             
+</div>
+
+<{include file="public/footer.html"}> 

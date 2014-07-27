@@ -1,0 +1,28 @@
+<{include file="public/header.html"}>
+<{load href="<{$res}>/css/uc.css" }>   
+<div class="uc clearfix">
+    <{include file="usercenter/head.html"}>    
+<{*--------------------------------------------------------------------------------------------*}>             
+        <div class="item_list infinite_scroll" style="min-height:200px;">
+        	<{if !empty($goodsResults)}>
+                        <{include file="public/goods_list.html"}>
+		<{else}>                
+			<div class="home_empty">
+				<span class="des">还没有喜欢过宝贝哦~</span>
+                        </div>            	
+                <{/if}>
+        </div>
+        <{if $show_sp eq 1}>
+            <div id="more" class="center">
+                <a href="<{$app}>/usercenter/like/sp/2/cid/<{$cid}>/p/<{$p}>/uid/<{$uid}>" hidefocus="true"></a>
+            </div>    	
+        <{/if}> 
+     
+            <div id="page" class="page mt20 clearfix" style="display: block;">
+                <span class="page_num"><{$fpage}></span>
+            </div>
+     
+<{*--------------------------------------------------------------------------------------------*}>             
+</div>
+
+<{include file="public/footer.html"}> 

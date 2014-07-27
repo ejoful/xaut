@@ -1,0 +1,32 @@
+<{include file="public/header.html"}>
+<{load href="<{$res}>/css/uc.css" }>
+<div class="uc clearfix">
+    <div class="album_nav mt20">
+        <div class="album_home"></div>
+	<a href="<{$app}>/album/index">专辑</a>/
+	<a href="<{$app}>/usercenter/album/uid/<{$uid}>"><{$uname}></a>/
+	<a><{$albumname}></a>
+    </div>
+    <{*--------------------------------------------------------------------------------------------*}>
+    <div class="item_list infinite_scroll like_list" style="min-height:200px;">
+        <div class="masonry_brick mt20" style="position: absolute; top: 0px; left: 0px;">
+            <{include file="usercenter/userinfo.html"}> 
+        </div>
+        <{if !empty($goodsResults)}> 
+            <{include file="public/goods_list.html"}>
+            <{else}>
+            <div class="home_empty"> 
+                <span class="des">还没有宝贝哦~</span> 
+            </div>
+        <{/if}>
+    </div>
+    <{if $show_sp eq 1}>
+        <div id="more" class="center"> 
+            <a href="<{$app}>/album/details/sp/2/cid/<{$cid}>/p/<{$p}>/uid<{$uid}>/id<{$info.album_id}>" hidefocus="true"></a> 
+       	</div>
+    <{/if}>
+    <{if $page neq ''}>
+        <div id="page" class="page mt20 clearfix" style="display: none;"> <span class="page_num"><{$page}></span> </div><{* 分页 *}>
+    <{/if}>
+    <{*--------------------------------------------------------------------------------------------*}> </div>
+<{include file="public/footer.html"}>

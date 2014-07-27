@@ -1,0 +1,1 @@
+<?php {"pri":"id","0":"adminname","1":"roleid","2":"password","3":"addtime","4":"logintime","5":"loginip","6":"status"}yes

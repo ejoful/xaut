@@ -1,0 +1,96 @@
+<{include file="index/header.html"}>
+<link rel="stylesheet" type="text/css" href="<{$public}>/js/calendar/calendar-blue.css"/>
+<script type="text/javascript" src="<{$public}>/js/calendar/calendar.js"></script>
+<script type="text/javascript" src="<{$public}>/js/jquery/plugins/jquery.imagePreview.js"></script>
+<div class="pad-10" >
+        <form name="searchform" action="" method="get" >
+                <table width="100%" cellspacing="0" class="search-form">
+                        <tbody>
+                                <tr>
+                                        <td>
+                                                <div class="explain-col">
+                                                        &nbsp;
+                                                        <select name="status">
+                                                                <option value="-1">-是否审核-</option>
+                                                                <option value="1" <{if $status eq 1}>selected="selected"<{/if}>>已审核</option>
+                                                                <option value="0" <{if $status === 0}>selected="selected"<{/if}>>未审核<{$status}></option>
+                                                        </select>
+                                                        &nbsp;用户名
+                                                        <input type="text" name="username" />
+                                                        &nbsp;关键字 :
+                                                        <input name="keyword" type="text" class="input-text" size="25" />
+                                                        <input type="submit" name="search" class="button" value="搜索" />
+                                                </div>
+                                        </td>
+                                </tr>
+                        </tbody>
+                </table>
+        </form>
+
+        <form id="myform" name="myform" action="<{$url}>/delete" method="post" onsubmit="return check();">
+                <div class="table-list">
+                        <table width="100%" cellspacing="0">
+                                <thead>
+                                        <tr>
+                                                <th width=15><input type="checkbox" value="" id="check_box" onclick="selectall('id[]');"></th>
+                                                <th width="40">ID</th>
+                                                <th width="40">&nbsp;</th>
+                                                <th width="300" align="left">通知内容</th>
+                                                <th width="100">通知时间</th>
+                                                <th width=30>是否查看</th>
+                                        </tr>
+                                </thead>
+                                <tbody>
+                                        <{foreach $user_notice_list as $val}>
+                                        <tr>
+                                                <td align="center"><input type="checkbox" value="<{$val.id}>" name="id[]"></td>
+                                                <td align="center"><{$val.id}></td>
+                                                <td align="center"><{$val.username}><br/><img src="<{$face[$val.fromuid]}>" width="35" class="preview" bimg="<{$face.$val.fromuid}>" title="<{$val.username}>"></td>
+                                                <td align="left"><span style="color:red"><{$val.content}></span></td>
+                                                <td align="center"><{date("Y-m-d",$val.addtime)}></td>
+                                                <td align="center" onclick="status(<{$val.id}>,<{$val.status}>)" id="status_<{$val.id}>"><img src="<{$public}>/images/status_<{$val.status}>.gif" /></td>
+                                        </tr>
+                                        <{/foreach}>
+                                </tbody>
+                        </table>
+
+                        <div class="btn">
+                                <label for="check_box" style="float:left;">全选/取消</label>
+                                <input type="submit" class="button" name="dosubmit" value="删除" onclick="return confirm('确定删除么？')" style="float:left;margin:0 10px 0 10px;"/>
+
+                                <div id="pages"><{$fpage}></div>
+                        </div>
+
+                </div>
+        </form>
+</div>
+<script language="javascript">
+        $(function(){
+                $(".preview").preview();
+        });
+
+        var lang_cate_name = "商品名称";
+        function check(){
+                if($("#myform").attr('action') == '{:u("items/delete")}') {
+                        var ids='';
+                        $("input[name='id[]']:checked").each(function(i, n){
+                                ids += $(n).val() + ',';
+                        });
+
+                        if(ids=='') {
+                                window.top.art.dialog({content:lang_please_select+lang_cate_name,lock:true,width:'200',height:'50',time:1.5},function(){});
+                                return false;
+                        }
+                }
+                return true;
+        }
+        function status(id,type){
+                $.get("<{$url}>/status", { id: id, type: type }, function(jsondata){
+                        var data = jsondata;
+                        $("#status_"+id+" img").attr('src', '<{$public}>/images/status_'+data+'.gif');
+                        $("#status_"+id).attr('onclick', 'status('+id+','+data+')');
+                });
+        }
+</script>
+</body>
+</html>

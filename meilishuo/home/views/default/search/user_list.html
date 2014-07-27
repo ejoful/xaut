@@ -1,0 +1,47 @@
+<{include file="public/header.html"}>
+<{load href="<{$res}>/css/uc.css"}>
+<{load href="<{$public}>/css/wwm.css"}>
+<div class="content">
+ 
+   
+    <div class="search_top box_shadow mt15">
+        <div class="search_box">
+            <form method="get" action="<{$app}>/search/index/type/search" onsubmit="return check_search(this);">
+					<input type="text" value="<{$keywords}>" name="keywords" id="keyword" class="fl">
+					<input type="submit" value="搜索" id="search_btn" class="white tc fl cursor">
+			</form>
+        </div>
+    </div>
+	<div id="wwm_search_result">
+		    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		    搜索“<span class="red"><{$keywords}></span>”相关的内容：
+		  
+		    <span><a href="<{$app}>/search/user_list/keywords/<{$keywords}>"><{count($userlist)}>  用户</a></span>
+	</div>	
+ 
+ 
+    <div class="search_result">
+        
+            <div class="middle">
+				<table align="center" style="text-align:left">
+					<caption><h2>搜索用户列表<br/><br/></h2></caption>
+					<tr><th width="150">&nbsp;&nbsp;&nbsp;用户名</th><th width="130">关注</th><th width="130">粉丝</th><th width="130">加关注</th></tr>
+					<{foreach $userlist as $user}>
+						<tr style="border-top:1px dashed gray">
+							<td>&nbsp;&nbsp;&nbsp;<img src="<{$res}>/images/userface/<{$user.face}>" width="80" height="80" /><{$user.username}></td>  
+							<td><{$user.follownum}></td>  
+							<td><{$user.fansnum}></td>  
+							<td>
+								<span class="add_follow <{if $user.isfollow eq 1}>yet<{/if}>" fans_id="<{$user.id}>"></span>
+							</td>  
+						</tr>
+					<{/foreach}>
+				</table>
+			</div>
+           
+			 <{if $page neq ''}><div id="page" class="page mt20" style="display: block;"><div class="page_num"><{$page}></div></div><{/if}>
+    </div>
+
+</div>
+
+<{include file="public/footer.html"}> 

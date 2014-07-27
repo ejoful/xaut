@@ -1,0 +1,8 @@
+.pad_10 {width:420px;float:left;background:white;position:absolute;z-index:2}
+.pad_10 #tit {background:blue;overflow:hidden;height:25px;}
+.pad_10 #tit a {background:red;width:25px;line-height:25px;text-align:center;float:right;color:white;}
+.pad_10 #con {background:white;width:400px;height:200px;padding:10px 0 0 20px;}
+.pad_10 #con td#mypos #fname {height:25px;line-height:25px;width:200px;}
+.pad_10 #con #mypos a {background:url(../images/mes_icon.gif) no-repeat center 0px;width:19px;height:18px;position:absolute;top:38px;left:268px;}
+.pad_10 #con textarea {width:300px;height:80px;}
+.pad_10 #con input#dosubmit {border:0;color:white;width:60px;height:28px;background:url(../images/btn.gif) no-repeat left top}

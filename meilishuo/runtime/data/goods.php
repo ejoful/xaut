@@ -1,0 +1,1 @@
+<?php {"pri":"id","0":"goodsname","1":"goodscid","2":"uid","3":"username","4":"aid","5":"addtime","6":"picname","7":"buyurl","8":"price","9":"description","10":"hits","11":"likesnum","12":"comments","13":"status"}yes

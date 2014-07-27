@@ -1,0 +1,216 @@
+<{include file="public/header.html"}>
+<script type="text/javascript">
+		var $myusername = "<{$smarty.session.username}>";
+		var $loginuid = "<{$loginuid}>";
+        var $goods_id="<{$goodsArr['id']}>";
+        var $app = "<{$app}>";
+		var $owneruid = "<{$goodsArr['uid']}>"
+</script>
+<{load href="<{$public}>/js/jquery/plugins/jquery.masonry.min.js" }>
+<{load href="<{$public}>/js/jquery/plugins/jquery.lazyload.js" }>
+<{load href="<{$public}>/js/jquery/jquery-1.7.2.min.js" }>
+
+<div class="content">
+        <div class="item_left fl">
+                <div class="single_item box_shadow mt15 clearfix">
+                        <dl class="twitter_top">
+                                <dt>
+                                <img src="<{$res}>/images/userface/<{$userarr.face}>">
+                                </dt>
+                                <dd>
+                                        <span style="color:#ccc;" class="fr">宝贝分享时间：<{date("m月d日 H:i", $goodsArr['addtime'])}></span>
+                                        <span class="gray">由</span> <a target="_blank" href="#" class="red"><{$userarr.username}></a>
+                                        <span class="gray">分享到</span>
+                                        <span><a target="_blank" href="#" class="red f12"><{$catename}></a></span>
+                                </dd>
+                                <dd class="quote_goods_title break_word"><{$goodsArr.goodsname}></dd>
+                        </dl>       
+
+                        <div class="item_pic">
+                                <br><a><img src="<{$public}>/uploads/goods/thumb_l/<{$goodsArr.addtime|date_format:'%Y-%m-%d'}>/<{$goodsArr.picname}>" /></a>
+
+
+                        </div>
+                        <div class="item_detail">
+                                <div class="break_word">
+                                        <p class="item_title f14 bold"><a href="#"><{$goodsArr.goodsname}></a></p>
+                                        <{if $item.price neq '0.00'}>
+                                        <div class="clearfix" style="padding:12px 0;">
+                                                <p class="fl">价格:<{$goodsArr.price}>元</p>
+                                        </div>
+                                        <{/if}>
+                                        <p class="p_heart">
+                                                <a class="like_it cursor pop_comm like_btn" iid="<{$goodsArr['id']}>"><b class="red nums" id="like_num_<{$goodsArr['id']}>"><{$goodsArr.likesnum}></b></a><br />
+                                                <{if $item.price neq '0.00'}>
+                                        <p style="margin-top:20px;"><a target="_blank" href="http://www.taobao.com" class="red f16">去购买&gt;&gt;</a></p>
+                                        <{/if}>
+                                        </p>
+                                </div>
+                        </div>
+                        <div class="item_tags clearfix">
+                                宝贝描述:<{$goodsArr.description}>
+                        </div>
+
+
+
+                        <!-- Baidu Button BEGIN -->
+                        <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare mt10" style="float:right;">
+                                <a class="bds_qzone"></a>
+                                <a class="bds_tsina"></a>
+                                <a class="bds_tqq"></a>
+                                <a class="bds_renren"></a>
+                                <span class="bds_more"></span>
+                        </div>
+                        <script type="text/javascript" id="bdshare_js" data="type=tools" ></script>
+                        <script type="text/javascript" id="bdshell_js"></script>
+
+
+                        <span class="fr mt15"><b class="red f14" id="comments_count"><{$totalComments}></b>评论&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+                        <div class="clearfix"></div>
+                        <{*----------------------------------------------评论------------------------------------------------------*}>
+                        <{* 导入AJAX评论的JS *}>
+
+                        <script>
+                                $(function () {         
+										
+                                        $("#comments_btn").click(function () {
+												<{if isset($username)}>
+												 
+															//判断该商品UID和当前用户ID知否相同，相同则不让评论该商品。			
+														if ($loginuid == $owneruid) {
+															alert(" 不能评论自己的商品哦^_^");
+															//如果输入框中的内容不为默认内容且不为空，才能发表该评论。
+														}else if ($.trim($("#comments_box").val()) != '对心爱的宝贝说几句话吧！~' && $.trim($("#comments_box").val()) != '') {
+													
+															 $.post($app+'/goods/doComment', {'content':$.trim($("#comments_box").val()), 'gid':$goods_id, 'touid':$owneruid}, function (data) {
+																  
+																 if (data != 0) {      //如果php处理结果为插入成功，则把结果显示到浏览器上
+																		 
+																			$ajaxReturnArr = eval('('+data+')');          
+					
+																			$("#commentlist").prepend('<li class="clearfix"></li>');                                                                      
+																			$('#commentlist li:first').html('<em class="avatar"><a href="#" title="#" target="_blank"><img src="<{$res}>/images/userface/'+$ajaxReturnArr.face+'"></a></em><div class="item_info"><div class="left"><a class="name" href="#" target="_blank">'+$myusername+' : </a>'+$("#comments_box").val() +'</div><div class="right">'+$ajaxReturnArr.time+'</div><div class="clear"></div></div>');
+																			$('#comments_count').html(parseInt($('#comments_count').html())+1);
+																			$("#comments_box").val(' 对心爱的宝贝说几句话吧！~');  
+																																						  
+																 }else {
+																			alert('评论失败， 请重新输入');
+																 }
+															 });
+															   
+													   } else {
+																		 $("#comments_box").focus();
+													   }     
+												<{else}>                                                
+														login();
+												<{/if}>
+                                                                                         
+										});    
+                                         
+                                        $("#comments_box").focus(function () {
+                                                if ($.trim($("#comments_box").val()) == '对心爱的宝贝说几句话吧！~') {
+                                                        $(this).val('');
+                                                }
+                                        });
+                                         
+                                        $("#comments_box").blur(function () {
+                                                if ($.trim($("#comments_box").val()) == '') {
+                                                        $(this).val(' 对心爱的宝贝说几句话吧！~');
+                                                }
+                                        });
+                                });
+                        </script>
+
+                        <div id="items_comments" class="clearfix comments">
+                                <div class="arrow"></div>            		
+                                <textarea id="comments_box" class="comments_box" maxlength="300"> 对心爱的宝贝说几句话吧！~ 
+                                </textarea>
+
+                                <div class="clearfix mt10">
+                                        <a id="comments_btn" class="comments_btn" pid="<{$items_id}>">评论</a>
+                                </div>
+                                <div class="list_wrap">
+                                        <div class="list">
+
+ 
+                                                <ul id="commentlist">     
+                                                        <{if isset($comments)}>
+                                                        <{foreach $comments as $comment}>                                                     
+
+                                                        <li class="clearfix">
+                                                                <em class="avatar">
+                                                                        <a href="#" title="#" target="_blank">                                                                                                                                                            
+                                                                                <img src="<{$res}>/images/userface/<{$comment.face}>">
+                                                                        </a>
+                                                                </em>
+                                                                <div class="item_info">
+                                                                        <div class="left">
+                                                                                <a class="name" href="#" target="_blank"><{$comment.username}> : </a><{$comment['content']}>
+                                                                        </div>
+                                                                        <div class="right"><{date("m月d日 H:i", <{$comment['addtime']}>)}></div>
+                                                                        <div class="clear"></div>
+
+                                                                </div>
+                                                        </li>
+                                                        <{/foreach}> 
+                                                        <li class="clearfix">   <{$fpage}></li>
+                                                        <{/if}>
+                                                </ul>
+
+                                              
+                                        </div>
+                                </div>
+                        </div>
+                        <{*----------------------------------------------------------------------------------------------------*}>          
+                </div>       
+            
+                <h3 class="f16 mt15">也许你还喜欢</h3>
+                <div class="detail_item_list infinite_scroll">
+                        <{include file="public/goods_list.html"}>
+                </div>
+                <!--发现更多-->
+                <div class="pager">
+                        <div class="more tc f16">
+                                <samp class="fl"><a href="<{$app}>/cate/index/cid/<{$goodsArr['goodscid']}>" class="red">去查看更多同类分享&gt;&gt;</a></samp>
+                                <span class="hua fl"> </span>
+                        </div>
+                </div>
+        </div>
+        <div class="item_right fr">
+                <h3 class="f16 mt15">所在专辑</h3>
+                <div class="box_shadow mt15 group_box">
+                        <div class="groupbg">
+                                <h3 class="f16 bold">
+								<{if !empty($albuminfo.picname)}>
+								<a target="_blank" href="<{$app}>/album/details/id/<{$albuminfo['id']}>/uid/<{$albuminfo['uid']}>">
+								<{$albuminfo.albumname}>
+								</a>
+								<{else}>
+								暂无专辑
+								<{/if}>
+								</h3>
+
+                                <div class="mt5 cursor block g_db_bg">
+                                        
+									<{if !empty($albuminfo.picname)}>
+										<a href="<{$app}>/album/details/id/<{$albuminfo['id']}>/uid/<{$albuminfo['uid']}>">
+											<img src="<{$public}>/uploads/albums/<{$albuminfo.uid}>/<{$albuminfo.picname}>">
+										</a>								 
+									<{/if}>
+										
+                                </div>
+
+                                <div class="group_desc mt10">
+                                        <span class="follow_red_btn tc cursor fr"><a target="_blank" href="<{$app}>/album/details/id/<{$albuminfo['id']}>/uid/<{$albuminfo['uid']}>" class="white">去看看</a></span>
+                             
+                                </div>
+                                <div class="mt10"></div>
+                        </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="mt15" style="width:226px; overflow:hidden;">
+                        <script language="javascript" src="{:u('advert/index', array('id'=>5))}"></script>
+                </div>
+        </div>
+</div>
+<{include file="public/footer.html"}>

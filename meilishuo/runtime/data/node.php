@@ -1,0 +1,1 @@
+<?php {"pri":"id","0":"module","1":"module_name","2":"action","3":"action_name"}yes

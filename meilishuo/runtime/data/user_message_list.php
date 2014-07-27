@@ -1,0 +1,1 @@
+<?php {"pri":"id","0":"fromuid","1":"title","2":"messnum","3":"min_max","4":"mtime","5":"lastmessage"}yes

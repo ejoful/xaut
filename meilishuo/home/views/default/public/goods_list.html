@@ -1,0 +1,68 @@
+<{foreach $goodsResults as $val}>
+<{if $val.status eq 1}>
+<div class="item mt15 masonry_brick jq_corner" data-corner="7px" aid="<{$val.aid}>" iid="<{$val.id}>"> 
+        <div class="item_t">
+            <div class="img tc"> 
+				<a target="_blank" href="<{$app}>/goods/index/id/<{$val.id}>" hidefocus="true" rel="nofollow">
+					<img alt="<{$val.goodsname}>" class="mysrc" width="210" src="<{$public}>/uploads/goods/thumb_m/<{$val.addtime|date_format:'%Y-%m-%d'}>/<{$val.picname}>" style="display:inline;" />
+				</a>
+				<span class="price">￥<{$val.price}></span> 
+				<div class="btns">
+					<a href="javascript:;" class="img_album_btn" iid="<{$val.id}>">                         
+						加入专辑
+					</a>               
+				</div>
+         	</div>
+            <div class="title">
+                <span><{$val.goodsname}></span>
+            </div>
+        </div>
+        <div class="item_b clearfix">
+            <div class="items_likes fl"> 
+                    <a class="like_btn" iid="<{$val.id}>" iurl="<{$app}>/goods/index/id/<{$val.id}>"></a>
+                    <em class="red bold" id="like_num_<{$val.id}>"><{$val.likesnum}></em> 
+           	</div>
+            <div class="items_comment fr">
+                    <a href="<{$app}>/goods/index/id/<{$val.id}>" target="_blank">评论</a>
+					<em class="red bold">(<{$val.comments}>)</em> 
+            </div>
+        </div>  
+		<{*------------------------------------------------------------------------------------------------------*}>
+		<{if isset($val.username)}>
+				<div class="user clearfix">
+					<div class="clearfix">
+						<div class="avatar">
+                            <img src="<{$res}>/images/userface/<{$val.face}>" width="30px" height="30px"/>
+						</div>                
+						<div class="user_info">
+							<a href="<{$app}>/usercenter/index/uid/<{$val['uid']}>">
+								来自#<em><{$val.username}></em>#的分享
+							</a>
+							<span>
+								<{if $val.remark_status eq 1}>
+									<{$val.remark}>
+								<{/if}>
+							</span>
+						</div>
+					</div>
+				</div>   
+		<{/if}>         
+		<{*------------------------------------------------------------------------------------------------------*}>
+		<{if  isset($val['comments_list'])}>
+			<div class="comments_list">
+				<{foreach $val['comments_list'] as $comment}>
+					<div class="clearfix comment_item">
+						<div class="fl">
+							<img src="<{$res}>/images/userface/<{$comment.face}>"  width="20px" height="20px" class="uimg fl"/><span class="uname"><{$comment.username}></span> :
+					    </div>
+						<{$comment.content }>
+					</div>
+				<{/foreach}>
+			</div>		
+		<{/if}>
+</div>	
+<{/if}>
+<{/foreach}>
+
+
+
